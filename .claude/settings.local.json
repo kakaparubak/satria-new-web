@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Skill(context7-mcp)",
+      "Skill(context7-mcp:*)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "Bash(bun run *)",
+      "Bash(bun install *)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(bun add *)",
+      "mcp__MiniMax__understand_image"
+    ]
+  }
+}
