@@ -14,6 +14,41 @@ interface ExpandingSectionsProps {
   sections: Section[];
 }
 
+const animatePanels = (
+  from: HTMLDivElement,
+  to: HTMLDivElement,
+  fromIndex: number,
+  toIndex: number,
+  setActiveIndex: (i: number) => void,
+  setisSectionActive: (b: boolean) => void,
+  scrollPositions: React.MutableRefObject<number[]>,
+  isTransitioning: React.MutableRefObject<boolean>
+) => {
+  isTransitioning.current = true
+
+  // Save scroll position of current section
+  const fromScrollable = from.querySelector('.overflow-y-auto')
+  if (fromScrollable) {
+    scrollPositions.current[fromIndex] = (fromScrollable as HTMLElement).scrollTop
+  }
+
+  const tl = gsap.timeline({
+    onComplete: () => {
+      isTransitioning.current = false
+      setActiveIndex(toIndex)
+      // Restore scroll position of new active section
+      const toScrollable = to.querySelector('.overflow-y-auto')
+      if (toScrollable) {
+        (toScrollable as HTMLElement).scrollTop = scrollPositions.current[toIndex]
+      }
+      setisSectionActive(true)
+    },
+  })
+
+  tl.to(from, { height: '0px', duration: 0.5, ease: 'power2.inOut' })
+    .to(to, { height: '100dvh', duration: 0.5, ease: 'power2.inOut' }, '<')
+}
+
 const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isSectionActive, setisSectionActive] = useState<boolean>(false);
