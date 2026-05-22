@@ -182,6 +182,40 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
           onClick={() => handlePanelClick(index)}
           onMouseEnter={() => handleMouseEnterLabel(index)}
           onMouseLeave={() => handleMouseLeaveLabel(index)}
+          onWheel={(e) => {
+            if (isTransitioning.current) return
+            const panel = refs.current[index]
+            if (!panel) return
+            const scrollable = panel.querySelector('.overflow-y-auto') as HTMLElement | null
+            if (!scrollable) return
+
+            const atTop = scrollable.scrollTop === 0
+            const atBottom = scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 1
+
+            if (atTop && e.deltaY < 0 && index > 0) {
+              animatePanels(
+                refs.current[index]!,
+                refs.current[index - 1]!,
+                index,
+                index - 1,
+                setActiveIndex,
+                setisSectionActive,
+                scrollPositions,
+                isTransitioning
+              )
+            } else if (atBottom && e.deltaY > 0 && index < sections.length - 1) {
+              animatePanels(
+                refs.current[index]!,
+                refs.current[index + 1]!,
+                index,
+                index + 1,
+                setActiveIndex,
+                setisSectionActive,
+                scrollPositions,
+                isTransitioning
+              )
+            }
+          }}
           className={`w-full h-[20dvh] cursor-pointer flex items-start relative overflow-hidden`}
         >
           <div
