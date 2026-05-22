@@ -15,13 +15,38 @@ interface ExpandingSectionsProps {
 }
 
 const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [isSectionVisible, setIsSectionVisible] = useState<boolean>(false);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [isSectionActive, setisSectionActive] = useState<boolean>(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const refs = React.useRef<(HTMLDivElement | null)[]>([]);
   const bgRefs = React.useRef<(HTMLDivElement | null)[]>([]);
   const labelRefs = React.useRef<(HTMLDivElement | null)[]>([]);
   const underlineRefs = React.useRef<(HTMLDivElement | null)[]>([]);
+  const scrollPositions = React.useRef<number[]>(sections.map(() => 0));
+  const isTransitioning = React.useRef(false);
+
+  React.useEffect(() => {
+    refs.current.forEach((el, i) => {
+      if (el) {
+        gsap.set(el, { height: i === 0 ? "100dvh" : "0px" });
+      }
+    });
+    bgRefs.current.forEach((el, i) => {
+      if (el) {
+        gsap.set(el, { opacity: i === 0 ? 0 : 1 });
+      }
+    });
+  }, []);
+
+  React.useEffect(() => {
+    if (activeIndex !== -1 && refs.current[activeIndex]) {
+      // Save scroll position before leaving a section
+      const scrollableContent = refs.current[activeIndex].querySelector('.overflow-y-auto')
+      if (scrollableContent) {
+        scrollPositions.current[activeIndex] = (scrollableContent as HTMLElement).scrollTop
+      }
+    }
+  }, [activeIndex])
 
   const handleMouseEnterLabel = (index: number) => {
     const label = labelRefs.current[index];
@@ -65,30 +90,30 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
     }
   };
 
-  const handleClose = () => {
-    if (activeIndex !== null) {
-      setActiveIndex(null);
-      refs.current.forEach((el) => {
-        if (el) {
-          gsap.to(el, { height: "20dvh", duration: 0.5, ease: "power2.inOut" });
-        }
-      });
-      if (bgRefs.current[activeIndex]) {
-        gsap.to(bgRefs.current[activeIndex], { opacity: 1, duration: 0.3 });
+  const handleOpenMenu = () => {
+    setActiveIndex(-1);
+    refs.current.forEach((el) => {
+      if (el) {
+        gsap.to(el, { height: "20dvh", duration: 0.5, ease: "power2.inOut" });
       }
-      setIsSectionVisible(false);
-    }
+    });
+    bgRefs.current.forEach((el) => {
+      if (el) {
+        gsap.to(el, { opacity: 1, duration: 0.3 });
+      }
+    });
+    setisSectionActive(false);
   };
 
   const handlePanelClick = (index: number) => {
-    if (activeIndex !== index) {
+    if (activeIndex === -1) {
       setActiveIndex(index);
       refs.current.forEach((el, i) => {
         if (el) {
           if (i === index) {
             gsap
               .to(el, { height: "100dvh", duration: 0.5, ease: "power2.inOut" })
-              .then(() => setIsSectionVisible(true));
+              .then(() => setisSectionActive(true));
           } else {
             gsap.to(el, { height: "0px", duration: 0.5, ease: "power2.inOut" });
           }
@@ -105,12 +130,12 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
       ref={containerRef}
       className="flex flex-col h-dvh w-dvw overflow-hidden"
     >
-      {activeIndex !== null && (
+      {activeIndex !== -1 && (
         <button
-          onClick={handleClose}
+          onClick={handleOpenMenu}
           className="fixed top-8 left-8 z-50 bg-black/50 text-white px-4 py-2 rounded-lg font-bold text-xl hover:bg-black/70 transition-colors cursor-pointer"
         >
-          ← Back
+          ← Menu
         </button>
       )}
       {sections.map((section, index) => (
@@ -128,13 +153,13 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
             ref={(el) => {
               bgRefs.current[index] = el;
             }}
-            className={`absolute inset-0 ${section.color} ${isSectionVisible ? "z-10" : "z-30"}`}
+            className={`absolute inset-0 ${section.color} ${isSectionActive ? "z-10" : "z-30"}`}
           />
           <div
             ref={(el) => {
               labelRefs.current[index] = el;
             }}
-            className={`z-30 transition-opacity p-2 duration-300 origin-top-left ${activeIndex === index ? "opacity-0" : "opacity-100"}`}
+            className={`${isSectionActive ? "z-10" : "z-30"} transition-opacity p-2 duration-300 origin-top-left ${activeIndex === -1 ? "opacity-100" : "opacity-0 pointer-events-none"}`}
           >
             {section.label}
             <div
@@ -146,10 +171,10 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
             />
           </div>
           <div
-            className="absolute inset-0 z-20 overflow-y-auto h-full"
+            className={`absolute inset-0 z-20 overflow-y-auto transition-opacity duration-300 h-full ${activeIndex === -1 ? "opacity-100 pointer-events-none" : "opacity-100"}`}
             onClick={(e) => e.stopPropagation()}
           >
-            {section.content}
+            {(activeIndex !== -1 || !isSectionActive) && section.content}
           </div>
         </div>
       ))}
