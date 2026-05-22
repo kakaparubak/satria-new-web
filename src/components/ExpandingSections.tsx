@@ -59,6 +59,7 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
   const underlineRefs = React.useRef<(HTMLDivElement | null)[]>([]);
   const scrollPositions = React.useRef<number[]>(sections.map(() => 0));
   const isTransitioning = React.useRef(false);
+  const touchStartY = React.useRef<number>(0);
 
   React.useEffect(() => {
     refs.current.forEach((el, i) => {
@@ -209,6 +210,45 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
                 refs.current[index + 1]!,
                 index,
                 index + 1,
+                setActiveIndex,
+                setisSectionActive,
+                scrollPositions,
+                isTransitioning
+              )
+            }
+          }}
+          onTouchStart={(e) => {
+            touchStartY.current = e.touches[0].clientY
+          }}
+          onTouchEnd={(e) => {
+            if (isTransitioning.current) return
+            const delta = touchStartY.current - e.changedTouches[0].clientY
+            const threshold = 50
+            const panel = refs.current[index]
+            if (!panel) return
+            const scrollable = panel.querySelector('.overflow-y-auto') as HTMLElement | null
+            if (!scrollable) return
+
+            const atTop = scrollable.scrollTop === 0
+            const atBottom = scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 1
+
+            if (delta > threshold && atBottom && index < sections.length - 1) {
+              animatePanels(
+                refs.current[index]!,
+                refs.current[index + 1]!,
+                index,
+                index + 1,
+                setActiveIndex,
+                setisSectionActive,
+                scrollPositions,
+                isTransitioning
+              )
+            } else if (delta < -threshold && atTop && index > 0) {
+              animatePanels(
+                refs.current[index]!,
+                refs.current[index - 1]!,
+                index,
+                index - 1,
                 setActiveIndex,
                 setisSectionActive,
                 scrollPositions,
