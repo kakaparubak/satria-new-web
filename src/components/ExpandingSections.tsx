@@ -22,32 +22,48 @@ const animatePanels = (
   setActiveIndex: (i: number) => void,
   setisSectionActive: (b: boolean) => void,
   scrollPositions: React.MutableRefObject<number[]>,
-  isTransitioning: React.MutableRefObject<boolean>
+  isTransitioning: React.MutableRefObject<boolean>,
+  bgRefs: React.MutableRefObject<(HTMLDivElement | null)[]>,
 ) => {
-  isTransitioning.current = true
+  isTransitioning.current = true;
 
   // Save scroll position of current section
-  const fromScrollable = from.querySelector('.overflow-y-auto')
+  const fromScrollable = from.querySelector(".overflow-y-auto");
   if (fromScrollable) {
-    scrollPositions.current[fromIndex] = (fromScrollable as HTMLElement).scrollTop
+    scrollPositions.current[fromIndex] = (
+      fromScrollable as HTMLElement
+    ).scrollTop;
   }
 
   const tl = gsap.timeline({
     onComplete: () => {
-      isTransitioning.current = false
-      setActiveIndex(toIndex)
+      isTransitioning.current = false;
+      setActiveIndex(toIndex);
       // Restore scroll position of new active section
-      const toScrollable = to.querySelector('.overflow-y-auto')
+      const toScrollable = to.querySelector(".overflow-y-auto");
       if (toScrollable) {
-        (toScrollable as HTMLElement).scrollTop = scrollPositions.current[toIndex]
+        (toScrollable as HTMLElement).scrollTop =
+          scrollPositions.current[toIndex];
       }
-      setisSectionActive(true)
     },
-  })
+  });
 
-  tl.to(from, { height: '0px', duration: 0.5, ease: 'power2.inOut' })
-    .to(to, { height: '100dvh', duration: 0.5, ease: 'power2.inOut' }, '<')
-}
+  setisSectionActive(false);
+  tl.to(from, { height: "0px", duration: 0.5, ease: "power2.inOut" }).to(
+    bgRefs.current[fromIndex],
+    { opacity: 1, duration: 0.3, ease: "power2.inOut" },
+    "<",
+  );
+  tl.to(to, { height: "100dvh", duration: 0.5, ease: "power2.inOut" }, "<")
+    .to(
+      bgRefs.current[toIndex],
+      { opacity: 0, duration: 0.3, ease: "power2.inOut" },
+      "<",
+    )
+    .then(() => {
+      setisSectionActive(true);
+    });
+};
 
 const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -77,12 +93,15 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
   React.useEffect(() => {
     if (activeIndex !== -1 && refs.current[activeIndex]) {
       // Save scroll position before leaving a section
-      const scrollableContent = refs.current[activeIndex].querySelector('.overflow-y-auto')
+      const scrollableContent =
+        refs.current[activeIndex].querySelector(".overflow-y-auto");
       if (scrollableContent) {
-        scrollPositions.current[activeIndex] = (scrollableContent as HTMLElement).scrollTop
+        scrollPositions.current[activeIndex] = (
+          scrollableContent as HTMLElement
+        ).scrollTop;
       }
     }
-  }, [activeIndex])
+  }, [activeIndex]);
 
   const handleMouseEnterLabel = (index: number) => {
     const label = labelRefs.current[index];
@@ -129,11 +148,13 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
   const handleOpenMenu = () => {
     // Save scroll before collapsing
     if (activeIndex !== -1) {
-      const panel = refs.current[activeIndex]
+      const panel = refs.current[activeIndex];
       if (panel) {
-        const scrollable = panel.querySelector('.overflow-y-auto') as HTMLElement | null
+        const scrollable = panel.querySelector(
+          ".overflow-y-auto",
+        ) as HTMLElement | null;
         if (scrollable) {
-          scrollPositions.current[activeIndex] = scrollable.scrollTop
+          scrollPositions.current[activeIndex] = scrollable.scrollTop;
         }
       }
     }
@@ -141,7 +162,11 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
     setActiveIndex(-1);
     refs.current.forEach((el) => {
       if (el) {
-        gsap.to(el, { height: "calc(100dvh / 6)", duration: 0.5, ease: "power2.inOut" });
+        gsap.to(el, {
+          height: "calc(100dvh / 6)",
+          duration: 0.5,
+          ease: "power2.inOut",
+        });
       }
     });
     bgRefs.current.forEach((el) => {
@@ -156,32 +181,34 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
     if (activeIndex === -1) {
       // Save scroll of current section before transition
       if (activeIndex !== -1) {
-        const currentPanel = refs.current[activeIndex]
+        const currentPanel = refs.current[activeIndex];
         if (currentPanel) {
-          const scrollable = currentPanel.querySelector('.overflow-y-auto') as HTMLElement | null
+          const scrollable = currentPanel.querySelector(
+            ".overflow-y-auto",
+          ) as HTMLElement | null;
           if (scrollable) {
-            scrollPositions.current[activeIndex] = scrollable.scrollTop
+            scrollPositions.current[activeIndex] = scrollable.scrollTop;
           }
         }
       }
 
-      setActiveIndex(index)
+      setActiveIndex(index);
       refs.current.forEach((el, i) => {
         if (el) {
           if (i === index) {
             gsap
-              .to(el, { height: '100dvh', duration: 0.5, ease: 'power2.inOut' })
-              .then(() => setisSectionActive(true))
+              .to(el, { height: "100dvh", duration: 0.5, ease: "power2.inOut" })
+              .then(() => setisSectionActive(true));
           } else {
-            gsap.to(el, { height: '0px', duration: 0.5, ease: 'power2.inOut' })
+            gsap.to(el, { height: "0px", duration: 0.5, ease: "power2.inOut" });
           }
         }
-      })
+      });
       if (bgRefs.current[index]) {
-        gsap.to(bgRefs.current[index], { opacity: 0, duration: 0.3 })
+        gsap.to(bgRefs.current[index], { opacity: 0, duration: 0.3 });
       }
     }
-  }
+  };
 
   return (
     <div
@@ -206,16 +233,42 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
           onMouseEnter={() => handleMouseEnterLabel(index)}
           onMouseLeave={() => handleMouseLeaveLabel(index)}
           onWheel={(e) => {
-            if (isTransitioning.current) return
-            const panel = refs.current[index]
-            if (!panel) return
-            const scrollable = panel.querySelector('.overflow-y-auto') as HTMLElement | null
-            if (!scrollable) return
+            if (isTransitioning.current) return;
 
-            const atTop = scrollable.scrollTop === 0
-            const atBottom = scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 1
+            // Handle scroll from HOME to menu
+            if (index === 0 && e.deltaY > 0 && activeIndex === 0) {
+              // Scroll down from HOME → open menu
+              handleOpenMenu();
+              return;
+            }
+
+            // Handle scroll from menu to sections
+            if (activeIndex === -1 && e.deltaY > 0 && index === 1) {
+              // Scroll down from menu while BIOGRAPHY is visible → go to BIOGRAPHY
+              handlePanelClick(1);
+              return;
+            }
+
+            // Don't trigger scroll navigation in menu state (except above case)
+            if (activeIndex === -1) return;
+            const panel = refs.current[index];
+            if (!panel) return;
+            const scrollable = panel.querySelector(
+              ".overflow-y-auto",
+            ) as HTMLElement | null;
+            if (!scrollable) return;
+
+            const atTop = scrollable.scrollTop === 0;
+            const atBottom =
+              scrollable.scrollTop + scrollable.clientHeight >=
+              scrollable.scrollHeight - 1;
 
             if (atTop && e.deltaY < 0 && index > 0) {
+              // Special case: scroll up from BIOGRAPHY → go to menu
+              if (index === 1) {
+                handleOpenMenu();
+                return;
+              }
               animatePanels(
                 refs.current[index]!,
                 refs.current[index - 1]!,
@@ -224,9 +277,19 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
                 setActiveIndex,
                 setisSectionActive,
                 scrollPositions,
-                isTransitioning
-              )
-            } else if (atBottom && e.deltaY > 0 && index < sections.length - 1) {
+                isTransitioning,
+                bgRefs,
+              );
+            } else if (
+              atBottom &&
+              e.deltaY > 0 &&
+              index < sections.length - 1
+            ) {
+              // Special case: scroll down from HOME → go to menu
+              if (index === 0) {
+                handleOpenMenu();
+                return;
+              }
               animatePanels(
                 refs.current[index]!,
                 refs.current[index + 1]!,
@@ -235,26 +298,53 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
                 setActiveIndex,
                 setisSectionActive,
                 scrollPositions,
-                isTransitioning
-              )
+                isTransitioning,
+                bgRefs,
+              );
             }
           }}
           onTouchStart={(e) => {
-            touchStartY.current = e.touches[0].clientY
+            touchStartY.current = e.touches[0].clientY;
           }}
           onTouchEnd={(e) => {
-            if (isTransitioning.current) return
-            const delta = touchStartY.current - e.changedTouches[0].clientY
-            const threshold = 50
-            const panel = refs.current[index]
-            if (!panel) return
-            const scrollable = panel.querySelector('.overflow-y-auto') as HTMLElement | null
-            if (!scrollable) return
+            if (isTransitioning.current) return;
+            const delta = touchStartY.current - e.changedTouches[0].clientY;
+            const threshold = 50;
 
-            const atTop = scrollable.scrollTop === 0
-            const atBottom = scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 1
+            // Handle swipe from HOME to menu
+            if (index === 0 && delta > threshold && activeIndex === 0) {
+              // Swipe down from HOME → open menu
+              handleOpenMenu();
+              return;
+            }
+
+            // Handle swipe from menu to sections
+            if (activeIndex === -1 && delta > threshold && index === 1) {
+              // Swipe down from menu while BIOGRAPHY is visible → go to BIOGRAPHY
+              handlePanelClick(1);
+              return;
+            }
+
+            // Don't trigger swipe navigation in menu state (except above case)
+            if (activeIndex === -1) return;
+            const panel = refs.current[index];
+            if (!panel) return;
+            const scrollable = panel.querySelector(
+              ".overflow-y-auto",
+            ) as HTMLElement | null;
+            if (!scrollable) return;
+
+            const atTop = scrollable.scrollTop === 0;
+            const atBottom =
+              scrollable.scrollTop + scrollable.clientHeight >=
+              scrollable.scrollHeight - 1;
 
             if (delta > threshold && atBottom && index < sections.length - 1) {
+              // Special case: swipe down from HOME → go to menu
+              if (index === 0) {
+                handleOpenMenu();
+                return;
+              }
               animatePanels(
                 refs.current[index]!,
                 refs.current[index + 1]!,
@@ -263,9 +353,15 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
                 setActiveIndex,
                 setisSectionActive,
                 scrollPositions,
-                isTransitioning
-              )
+                isTransitioning,
+                bgRefs,
+              );
             } else if (delta < -threshold && atTop && index > 0) {
+              // Special case: swipe up from BIOGRAPHY → go to menu
+              if (index === 1) {
+                handleOpenMenu();
+                return;
+              }
               animatePanels(
                 refs.current[index]!,
                 refs.current[index - 1]!,
@@ -274,8 +370,9 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
                 setActiveIndex,
                 setisSectionActive,
                 scrollPositions,
-                isTransitioning
-              )
+                isTransitioning,
+                bgRefs,
+              );
             }
           }}
           className={`w-full h-[calc(100dvh/6)] cursor-pointer flex items-start relative overflow-hidden`}
@@ -297,12 +394,12 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
               ref={(el) => {
                 underlineRefs.current[index] = el;
               }}
-              className={`absolute bottom-0 left-2 w-full h-1 origin-top-left ${index === 3 ? "bg-black" : index === 1 ? "bg-transparent" : "bg-white"}`}
+              className={`absolute bottom-0 left-2 w-full h-1 origin-top-left ${index === 4 ? "bg-black" : index === 2 ? "bg-transparent" : "bg-white"}`}
               style={{ transform: "scaleX(0)" }}
             />
           </div>
           <div
-            className={`absolute inset-0 z-20 overflow-y-auto transition-opacity duration-300 h-full ${activeIndex === -1 ? "opacity-100 pointer-events-none" : "opacity-100"}`}
+            className={`absolute inset-0 z-20 overflow-y-auto transition-opacity duration-300 h-full expandable-section ${activeIndex === -1 ? "opacity-100 pointer-events-none" : "opacity-100"}`}
             onClick={(e) => e.stopPropagation()}
           >
             {(activeIndex !== -1 || !isSectionActive) && section.content}

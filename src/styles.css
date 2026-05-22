@@ -8,3 +8,12 @@
   --font-inter: "Inter", sans-serif;
 }
 
+/* Hide scrollbars during section transitions */
+.expandable-section::-webkit-scrollbar {
+  display: none;
+}
+.expandable-section {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

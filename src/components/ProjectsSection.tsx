@@ -80,11 +80,11 @@ const ProjectsSection = () => {
       </div>
       <hr className="border-0 border-b-6 w-[90dvw]"></hr>
       <div className="relative z-100 flex h-full py-16 px-12 gap-12">
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
           {projects.map((curr, index) => {
             return (
               <div
-                className="flex flex-col gap-4 px-8 mouse-hover-detect"
+                className="flex flex-col gap-8 px-8 mouse-hover-detect"
                 key={`project-${index}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
@@ -113,7 +113,7 @@ const ProjectsSection = () => {
                   ref={(el) => {
                     panelRefs.current[index] = el;
                   }}
-                  className="flex flex-col gap-2 overflow-hidden"
+                  className="flex flex-col gap-4 overflow-hidden"
                   style={{ height: 0, opacity: 0, visibility: "hidden" }}
                 >
                   <div className="flex gap-3">
@@ -127,7 +127,7 @@ const ProjectsSection = () => {
                       );
                     })}
                   </div>
-                  <p className="font-inter text-2xl tracking-tight leading-tight">
+                  <p className="font-inter text-2xl pb-10 tracking-tight leading-tight">
                     {curr.desc}
                   </p>
                 </div>
