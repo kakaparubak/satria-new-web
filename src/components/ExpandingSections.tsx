@@ -154,23 +154,34 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
 
   const handlePanelClick = (index: number) => {
     if (activeIndex === -1) {
-      setActiveIndex(index);
+      // Save scroll of current section before transition
+      if (activeIndex !== -1) {
+        const currentPanel = refs.current[activeIndex]
+        if (currentPanel) {
+          const scrollable = currentPanel.querySelector('.overflow-y-auto') as HTMLElement | null
+          if (scrollable) {
+            scrollPositions.current[activeIndex] = scrollable.scrollTop
+          }
+        }
+      }
+
+      setActiveIndex(index)
       refs.current.forEach((el, i) => {
         if (el) {
           if (i === index) {
             gsap
-              .to(el, { height: "100dvh", duration: 0.5, ease: "power2.inOut" })
-              .then(() => setisSectionActive(true));
+              .to(el, { height: '100dvh', duration: 0.5, ease: 'power2.inOut' })
+              .then(() => setisSectionActive(true))
           } else {
-            gsap.to(el, { height: "0px", duration: 0.5, ease: "power2.inOut" });
+            gsap.to(el, { height: '0px', duration: 0.5, ease: 'power2.inOut' })
           }
         }
-      });
+      })
       if (bgRefs.current[index]) {
-        gsap.to(bgRefs.current[index], { opacity: 0, duration: 0.3 });
+        gsap.to(bgRefs.current[index], { opacity: 0, duration: 0.3 })
       }
     }
-  };
+  }
 
   return (
     <div
