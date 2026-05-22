@@ -11,7 +11,9 @@
       "WebSearch",
       "WebFetch(domain:github.com)",
       "Bash(bun add *)",
-      "mcp__MiniMax__understand_image"
+      "mcp__MiniMax__understand_image",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }

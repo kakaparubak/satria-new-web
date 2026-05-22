@@ -4,51 +4,63 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Portfolio website for Satria Chandra (lighting designer) built with TanStack Start, Tailwind CSS v4, and GSAP for animations.
+Portfolio website for Satria Chandra (lighting designer) built with TanStack Start, Tailwind CSS v4, GSAP for animations, and Nitro for the production server.
 
 ## Commands
 
+Uses **Bun** as package manager. Scripts in package.json invoke `vite` directly, so `bun run dev` works fine.
+
 ```bash
 bun install           # Install dependencies
-bun --bun run dev     # Start development server
-bun --bun run build   # Build for production
-bun --bun run preview # Preview production build
-bun --bun run test    # Run tests with Vitest
-bun --bun run lint    # Lint with ESLint
-bun --bun run format  # Format with Prettier + fix lint
-bun --bun run check   # Check formatting without writing
+bun run dev           # Start development server
+bun run build         # Build for production
+bun run preview       # Preview production build
+bun run test          # Run tests with Vitest
+bun run lint          # Lint with ESLint
+bun run format        # Format with Prettier + fix lint
+bun run check         # Check formatting without writing
 ```
-
-Uses **Bun** as package manager. Always use `bun --bun` when running scripts.
 
 ## Architecture
 
 ### File-based Routing
 Routes live in `src/routes/`. The root layout is `src/routes/__root.tsx`. Route tree is auto-generated in `src/routeTree.gen.ts` — do not edit manually.
 
+### Path Alias
+The `#/*` alias maps to `./src/*` (configured in package.json `imports`). Use it for cleaner imports: `import HeroSection from '#/components/HeroSection'`
+
 ### Key Files
 - `src/router.tsx` — Router creation with SSR query integration
-- `src/routes/index.tsx` — Home page composing HeroSection, StatsSection, RCheckSection
-- `src/styles.css` — Tailwind imports and custom theme fonts (Anton, Oswald, Inter)
-- `public/data.ts` — Static image data for sections (statsImages, rcheckImages)
+- `src/routes/index.tsx` — Home page composing all sections via `ExpandingSections`
+- `src/styles.css` — Tailwind imports, custom fonts (Anton, Oswald, Inter), and `@theme` block
+- `public/data.ts` — Static image data for sections (statsImages, rcheckImages, projects)
 
 ### Components
-- `HeroSection` — Full-screen hero with large typography
-- `StatsSection` — GSAP-animated overlapping images with mouse parallax
-- `RCheckSection` — Reality Check section (in progress)
+The home page uses a single `ExpandingSections` component (an animated accordion) that renders these sections:
+- `HeroSection` — Full-screen hero with background video and large typography
+- `StatsSection` — GSAP-animated overlapping images with mouse parallax (Biography)
+- `RCheckSection` — Reality Check section with logo and images
+- `SkillsSection` — Skills display
+- `ProjectsSection` — Projects grid/list
+- `ContactSection` — Contact information
 
 ### Styling
-Tailwind CSS v4 with `@tailwindcss/vite` plugin and `@tailwindcss/typography` plugin. Custom fonts defined via Google Fonts import in styles.css.
+Tailwind CSS v4 with `@tailwindcss/vite` plugin and `@tailwindcss/typography` plugin. Fonts loaded via Google Fonts in styles.css:
+- Anton (display font)
+- Oswald (headings)
+- Inter (body)
 
 ### Animations
-GSAP with `@gsap/react` plugin. StatsSection uses `useGSAP` hook for scroll-triggered animations and mouse parallax effects.
+GSAP with `@gsap/react` plugin. Components like `ExpandingSections` and `StatsSection` use `useGSAP` hook for scroll-triggered and mouse-driven animations.
 
 ### DevTools
 TanStack Router DevTools and TanStack Query DevTools are integrated in the root layout shell.
 
+### Theme System
+Theme (light/dark/auto) is initialized via inline `<script>` in `__root.tsx` before React hydrates to prevent flash of wrong theme.
+
 ## Important Notes
 
 - `src/routeTree.gen.ts` is auto-generated — any changes will be overwritten
-- Read current component state before modifying — GSAP animations may have complex state dependencies
-- The site uses CSS custom fonts: Anton (display), Oswald (headings), Inter (body)
-- Theme (light/dark/auto) is initialized via inline script in `__root.tsx` before React hydrates
+- GSAP animations have complex state dependencies — read current component state before modifying
+- The ExpandingSections component manages which section is open via local state — content sections render even when collapsed

@@ -85,6 +85,7 @@ const ProjectsSection = () => {
             return (
               <div
                 className="flex flex-col gap-4 px-8 mouse-hover-detect"
+                key={`project-${index}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
               >
@@ -116,9 +117,10 @@ const ProjectsSection = () => {
                   style={{ height: 0, opacity: 0, visibility: "hidden" }}
                 >
                   <div className="flex gap-3">
-                    {curr.imgs.map((currImg) => {
+                    {curr.imgs.map((currImg, imgIndex) => {
                       return (
                         <img
+                          key = {`img-${imgIndex}`}
                           className="rounded-lg object-contain h-[25dvh] shadow-2xl"
                           src={currImg}
                         ></img>
@@ -138,9 +140,7 @@ const ProjectsSection = () => {
       <div className="w-full py-16 px-12">
         <div className="flex flex-col gap-8 px-8">
           <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-7xl decoration-4">
-              TOTAL
-            </p>
+            <p className="font-anton text-7xl decoration-4">TOTAL</p>
             <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4  border-black"></hr>
             <p className="font inter text-5xl font-bold tracking-tighter">
               {projects.length} PROJECTS

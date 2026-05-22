@@ -141,7 +141,7 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
     setActiveIndex(-1);
     refs.current.forEach((el) => {
       if (el) {
-        gsap.to(el, { height: "20dvh", duration: 0.5, ease: "power2.inOut" });
+        gsap.to(el, { height: "calc(100dvh / 6)", duration: 0.5, ease: "power2.inOut" });
       }
     });
     bgRefs.current.forEach((el) => {
@@ -278,7 +278,7 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
               )
             }
           }}
-          className={`w-full h-[20dvh] cursor-pointer flex items-start relative overflow-hidden`}
+          className={`w-full h-[calc(100dvh/6)] cursor-pointer flex items-start relative overflow-hidden`}
         >
           <div
             ref={(el) => {
