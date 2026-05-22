@@ -127,6 +127,17 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
   };
 
   const handleOpenMenu = () => {
+    // Save scroll before collapsing
+    if (activeIndex !== -1) {
+      const panel = refs.current[activeIndex]
+      if (panel) {
+        const scrollable = panel.querySelector('.overflow-y-auto') as HTMLElement | null
+        if (scrollable) {
+          scrollPositions.current[activeIndex] = scrollable.scrollTop
+        }
+      }
+    }
+
     setActiveIndex(-1);
     refs.current.forEach((el) => {
       if (el) {
