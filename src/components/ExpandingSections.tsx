@@ -230,7 +230,7 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
       {activeIndex !== -1 && (
         <button
           onClick={handleOpenMenu}
-          className="fixed top-8 left-8 z-50 text-white px-4 py-2 rounded-lg font-bold text-xl hover:scale-120 hover:rotate-3 transition-transform cursor-pointer"
+          className="fixed top-6 lg:top-10 left-6 lg:left-10 z-50 text-white px-0 py-0 rounded-lg font-bold text-xl hover:scale-120 hover:rotate-3 transition-transform cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
