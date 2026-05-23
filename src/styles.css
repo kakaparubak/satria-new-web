@@ -19,7 +19,7 @@
 }
 
 .animate-marquee-scroll {
-  animation: marquee-scroll 20s linear infinite;
+  animation: marquee-scroll 60s linear infinite;
   will-change: transform;
 }
 
