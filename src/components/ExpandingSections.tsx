@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import Logo from "./Logo";
 
 gsap.registerPlugin(useGSAP);
 
@@ -148,6 +149,9 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
   };
 
   const handleOpenMenu = () => {
+    isTransitioning.current = true;
+    document.body.classList.add("transitioning");
+
     // Save scroll before collapsing
     if (activeIndex !== -1) {
       const panel = refs.current[activeIndex];
@@ -162,14 +166,13 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
     }
 
     setActiveIndex(-1);
-    refs.current.forEach((el) => {
-      if (el) {
-        gsap.to(el, {
-          height: "calc(100dvh / 6)",
-          duration: 0.5,
-          ease: "power2.inOut",
-        });
-      }
+    Promise.all(
+      refs.current.map((el) =>
+        el ? gsap.to(el, { height: "calc(100dvh / 6)", duration: 0.5, ease: "power2.inOut" }) : Promise.resolve()
+      )
+    ).then(() => {
+      isTransitioning.current = false;
+      document.body.classList.remove("transitioning");
     });
     bgRefs.current.forEach((el) => {
       if (el) {
@@ -227,9 +230,40 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
       {activeIndex !== -1 && (
         <button
           onClick={handleOpenMenu}
-          className="fixed top-8 left-8 z-50 bg-black/50 text-white px-4 py-2 rounded-lg font-bold text-xl hover:bg-black/70 transition-colors cursor-pointer"
+          className="fixed top-8 left-8 z-50 text-white px-4 py-2 rounded-lg font-bold text-xl hover:scale-120 hover:rotate-3 transition-transform cursor-pointer"
         >
-          ← Menu
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlSpace="preserve"
+            fillRule="evenodd"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeMiterlimit="1.5"
+            clipRule="evenodd"
+            viewBox="0 0 1000 1000"
+            className="w-8 h-8 drop-shadow-[0_0_5px_rgba(0,0,0,0.3)]"
+          >
+            <path
+              fill="#31E253"
+              d="m198.312 14.46 5.758 203.003 673.914 52.315L950.15 0z"
+            ></path>
+            <path
+              fill="#FFE23E"
+              d="m320.622 211.369-232.197-5.664-11.79 156.28 253.008 52.233z"
+            ></path>
+            <path
+              fill="#FE0928"
+              d="M264.417 382.054 249.96 543.14l581.114 83.26 8.093-167.19z"
+            ></path>
+            <path
+              fill="#2B83E5"
+              d="m714.62 604.06 207.966 22.412-1.961 185.065-226.357-16.425z"
+            ></path>
+            <path
+              fill="#1E3CD6"
+              d="m834.929 787.983-785.08-80.79 67.6 291.97 717.32-31.032z"
+            ></path>
+          </svg>
         </button>
       )}
       {sections.map((section, index) => (
@@ -242,7 +276,10 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
           onMouseEnter={() => handleMouseEnterLabel(index)}
           onMouseLeave={() => handleMouseLeaveLabel(index)}
           onWheel={(e) => {
-            if (isTransitioning.current) return;
+            if (isTransitioning.current) {
+              e.preventDefault();
+              return;
+            }
 
             // Handle scroll from HOME to menu
             if (index === 0 && e.deltaY > 0 && activeIndex === 0) {
