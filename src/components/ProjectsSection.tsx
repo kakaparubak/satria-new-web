@@ -65,7 +65,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section className="flex flex-col items-center relative text-black leading-none w-dvw bg-[#f4f4f4]">
+    <section className="flex flex-col items-center relative text-black leading-none w-dvw bg-[#f4f4f4] overflow-hidden">
       <div className="z-0 absolute w-full h-[10dvh] bg-linear-180 from-0% from-black/15 to-100% to-transparent"></div>
       <div className="flex flex-col justify-center items-center pb-10 pt-16 lg:py-20 md:py-20">
         <h2 className="font-inter text-5xl md:text-6xl lg:text-[6rem] font-bold tracking-tighter">
@@ -79,7 +79,7 @@ const ProjectsSection = () => {
         </p>
       </div>
       <hr className="border-0 border-b-6 w-[90dvw]"></hr>
-      <div className="relative z-100 flex h-full pt-12 pb-4 px-8 md:px-12 lg:px-20 gap-4 md:gap-10 lg:gap-12">
+      <div className="relative z-100 flex h-full pt-12 pb-4 px-8 md:px-12 lg:px-20 gap-4 md:gap-10 lg:gap-12 no-vertical-scrollbar">
         <div className="flex flex-col gap-2">
           {projects.map((curr, index) => {
             return (
@@ -116,12 +116,12 @@ const ProjectsSection = () => {
                   className="flex flex-col gap-4 overflow-hidden"
                   style={{ height: 0, opacity: 0, visibility: "hidden" }}
                 >
-                  <div className="flex gap-3 overflow-x-scroll custom-scrollbar">
+                  <div className="flex gap-3 overflow-x-scroll overflow-y-hidden custom-scrollbar">
                     {curr.imgs.map((currImg, imgIndex) => {
                       return (
                         <img
                           key = {`img-${imgIndex}`}
-                          className="rounded-lg object-contain h-[22dvh] md:h-[25dvh] lg:h-[30dvh] shadow-2xl"
+                          className="rounded-lg object-contain h-[22dvh] md:h-[25dvh] lg:h-[30dvh]"
                           src={currImg}
                         ></img>
                       );

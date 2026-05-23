@@ -26,6 +26,7 @@ const animatePanels = (
   bgRefs: React.MutableRefObject<(HTMLDivElement | null)[]>,
 ) => {
   isTransitioning.current = true;
+  document.body.classList.add("transitioning");
 
   // Save scroll position of current section
   const fromScrollable = from.querySelector(".overflow-y-auto");
@@ -38,6 +39,7 @@ const animatePanels = (
   const tl = gsap.timeline({
     onComplete: () => {
       isTransitioning.current = false;
+      document.body.classList.remove("transitioning");
       setActiveIndex(toIndex);
       // Restore scroll position of new active section
       const toScrollable = to.querySelector(".overflow-y-auto");
@@ -179,6 +181,9 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
 
   const handlePanelClick = (index: number) => {
     if (activeIndex === -1) {
+      isTransitioning.current = true;
+      document.body.classList.add("transitioning");
+
       // Save scroll of current section before transition
       if (activeIndex !== -1) {
         const currentPanel = refs.current[activeIndex];
@@ -198,7 +203,11 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
           if (i === index) {
             gsap
               .to(el, { height: "100dvh", duration: 0.5, ease: "power2.inOut" })
-              .then(() => setisSectionActive(true));
+              .then(() => {
+                isTransitioning.current = false;
+                document.body.classList.remove("transitioning");
+                setisSectionActive(true);
+              });
           } else {
             gsap.to(el, { height: "0px", duration: 0.5, ease: "power2.inOut" });
           }
@@ -387,7 +396,7 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
             ref={(el) => {
               labelRefs.current[index] = el;
             }}
-            className={`${isSectionActive ? "z-10" : "z-30"} transition-opacity p-2 duration-300 origin-top-left ${activeIndex === -1 ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+            className={`${isSectionActive ? "z-10" : "z-30"} transition-opacity leading-none p-2 duration-300 origin-top-left ${activeIndex === -1 ? "opacity-100" : "opacity-0 pointer-events-none"}`}
           >
             {section.label}
             <div

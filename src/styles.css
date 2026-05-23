@@ -31,7 +31,7 @@
 
 /* Thin, styled scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-  height: 6px;
+  height: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
@@ -42,5 +42,12 @@
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #a0a0a0;
+}
+
+/* Hide both scrollbars during section transitions */
+body.transitioning,
+body.transitioning * {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
 
