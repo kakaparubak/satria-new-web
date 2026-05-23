@@ -10,7 +10,7 @@ const ContactSection = () => {
         <div className="marquee-track">
           <p
             aria-hidden="true"
-            className="marquee-content text-nowrap font-inter -tracking-[0.1em]"
+            className="marquee-content text-2xl"
           >
             SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA
             CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA
@@ -19,7 +19,7 @@ const ContactSection = () => {
           </p>
           <p
             aria-hidden="true"
-            className="marquee-content text-nowrap font-inter -tracking-[0.1em]"
+            className="marquee-content text-2xl"
           >
             SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA
             CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA
