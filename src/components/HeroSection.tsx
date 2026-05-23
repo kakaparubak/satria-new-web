@@ -16,10 +16,10 @@ const HeroSection = () => {
         ></source>
       </video>
       <div className="absolute h-dvh w-dvw bg-radial-[circle_at_25%_50%] from-transparent to-black/70 to-69% -z-1"></div>
-      <div className="leading-none relative text-right flex flex-col items-end mr-[5%]">
-        <h1 className="text-[10.5rem] font-medium font-anton tracking-tight text-white">SATRIA</h1>
-        <h1 className="text-[10.5rem] font-medium font-anton tracking-tight text-white">CHANDRA</h1>
-        <img className="w-[60%]" src="../../public/lighting-designer.png" />
+      <div className="leading-none relative text-right flex flex-col items-end mr-[2%] sm:mr-[5%]">
+        <h1 className="text-5xl sm:text-7xl md:text-9xl lg:text-[10.5rem] font-medium font-anton tracking-tight text-white">SATRIA</h1>
+        <h1 className="text-5xl sm:text-7xl md:text-9xl lg:text-[10.5rem] font-medium font-anton tracking-tight text-white">CHANDRA</h1>
+        <img className="w-[80%] sm:w-[70%]" src="../../public/lighting-designer.png" />
       </div>
     </section>
   )
