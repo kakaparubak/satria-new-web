@@ -252,9 +252,16 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
             }
 
             // Handle scroll from menu to sections
-            if (activeIndex === -1 && e.deltaY > 0 && index === 1) {
-              // Scroll down from menu while BIOGRAPHY is visible → go to BIOGRAPHY
+            if (activeIndex === -1 && e.deltaY > 0) {
+              // Scroll down from menu → go to BIOGRAPHY
               handlePanelClick(1);
+              return;
+            }
+
+            // Handle scroll from menu to HOME
+            if (activeIndex === -1 && e.deltaY < 0) {
+              // Scroll up from menu → go to HOME
+              handlePanelClick(0);
               return;
             }
 
@@ -328,9 +335,16 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
             }
 
             // Handle swipe from menu to sections
-            if (activeIndex === -1 && delta > threshold && index === 1) {
-              // Swipe down from menu while BIOGRAPHY is visible → go to BIOGRAPHY
+            if (activeIndex === -1 && delta > threshold) {
+              // Swipe down from menu → go to BIOGRAPHY
               handlePanelClick(1);
+              return;
+            }
+
+            // Handle swipe from menu to HOME
+            if (activeIndex === -1 && delta < -threshold) {
+              // Swipe up from menu → go to HOME
+              handlePanelClick(0);
               return;
             }
 
