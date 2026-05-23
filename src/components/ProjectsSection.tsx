@@ -67,24 +67,24 @@ const ProjectsSection = () => {
   return (
     <section className="flex flex-col items-center relative text-black leading-none w-dvw bg-[#f4f4f4]">
       <div className="z-0 absolute w-full h-[10dvh] bg-linear-180 from-0% from-black/15 to-100% to-transparent"></div>
-      <div className="flex flex-col justify-center items-center py-20">
-        <h2 className="font-inter text-4xl sm:text-5xl md:text-6xl lg:text-[7rem] font-bold tracking-tighter">
+      <div className="flex flex-col justify-center items-center pb-10 pt-16 lg:py-20 md:py-20">
+        <h2 className="font-inter text-5xl md:text-6xl lg:text-[6rem] font-bold tracking-tighter">
           MY PROJECTS
         </h2>
-        <p className="font-inter text-3xl font-medium tracking-tighter">
+        <p className="font-inter text-xl md:text-2xl lg:text-3xl font-medium tracking-tighter">
           Bekasi, Jawa Barat
         </p>
-        <p className="font-inter text-3xl font-medium tracking-tighter">
+        <p className="font-inter text-xl md:text-2xl lg:text-3xl font-medium tracking-tighter">
           2005 Kid
         </p>
       </div>
       <hr className="border-0 border-b-6 w-[90dvw]"></hr>
-      <div className="relative z-100 flex h-full py-16 px-4 sm:px-8 md:px-12 gap-12">
+      <div className="relative z-100 flex h-full pt-12 pb-4 px-8 md:px-12 lg:px-20 gap-4 md:gap-10 lg:gap-12">
         <div className="flex flex-col gap-2">
           {projects.map((curr, index) => {
             return (
               <div
-                className="flex flex-col gap-8 px-8 mouse-hover-detect"
+                className="flex flex-col gap-6 md:gap-6 lg:gap-8 mouse-hover-detect"
                 key={`project-${index}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
@@ -99,12 +99,12 @@ const ProjectsSection = () => {
                     ref={(el) => {
                       textRefs.current[index] = el;
                     }}
-                    className="font-anton text-2xl sm:text-3xl md:text-5xl lg:text-7xl decoration-4 underline underline-offset-4"
+                    className="font-anton text-4xl md:text-5xl lg:text-7xl decoration-4 underline underline-offset-4"
                     style={{ textDecorationColor: "transparent" }}
                   >
                     {curr.name.toLocaleUpperCase()}
                   </p>
-                  <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4  border-black"></hr>
+                  <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4 border-black hidden md:block lg:block"></hr>
                   <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
                     {curr.date}
                   </p>
@@ -116,18 +116,18 @@ const ProjectsSection = () => {
                   className="flex flex-col gap-4 overflow-hidden"
                   style={{ height: 0, opacity: 0, visibility: "hidden" }}
                 >
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 overflow-x-scroll custom-scrollbar">
                     {curr.imgs.map((currImg, imgIndex) => {
                       return (
                         <img
                           key = {`img-${imgIndex}`}
-                          className="rounded-lg object-contain h-[25dvh] shadow-2xl"
+                          className="rounded-lg object-contain h-[22dvh] md:h-[25dvh] lg:h-[30dvh] shadow-2xl"
                           src={currImg}
                         ></img>
                       );
                     })}
                   </div>
-                  <p className="font-inter text-2xl pb-10 tracking-tight leading-tight">
+                  <p className="font-inter text-xl md:text-2xl lg:text-2xl pb-6 tracking-tight leading-tight">
                     {curr.desc}
                   </p>
                 </div>
@@ -137,30 +137,30 @@ const ProjectsSection = () => {
         </div>
       </div>
       <hr className="border-0 border-b-6 w-[90dvw]"></hr>
-      <div className="w-full py-16 px-4 sm:px-8 md:px-12">
-        <div className="flex flex-col gap-8 px-8">
+      <div className="w-full pt-12 pb-12 md:pb-16 lg:pb-16 px-8 md:px-12 lg:px-20">
+        <div className="flex flex-col gap-6 md:gap-6 lg:gap-8">
           <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-2xl sm:text-3xl md:text-5xl lg:text-7xl decoration-4">TOTAL</p>
-            <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4  border-black"></hr>
-            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-5xl font-bold tracking-tighter">
+            <p className="font-anton text-4xl md:text-5xl lg:text-7xl decoration-4">TOTAL</p>
+            <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4 border-black hidden md:block lg:block"></hr>
+            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
               {projects.length} PROJECTS
             </p>
           </div>
           <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-2xl sm:text-3xl md:text-5xl lg:text-7xl decoration-4">
+            <p className="font-anton text-4xl md:text-5xl lg:text-7xl">
               HOURS SPENT ON WYSIWYG
             </p>
-            <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4  border-black"></hr>
-            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-5xl font-bold tracking-tighter">
+            <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4 border-black hidden md:block lg:block"></hr>
+            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
               2000+
             </p>
           </div>
           <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-2xl sm:text-3xl md:text-5xl lg:text-7xl decoration-4">
-              COKE ZERO DRINKED
+            <p className="font-anton text-4xl md:text-5xl lg:text-7xl">
+              COKE ZERO DRANK
             </p>
-            <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4  border-black"></hr>
-            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-5xl font-bold tracking-tighter">
+            <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4 border-black hidden md:block lg:block"></hr>
+            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
               100+
             </p>
           </div>
