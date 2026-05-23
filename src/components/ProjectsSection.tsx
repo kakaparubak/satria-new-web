@@ -68,7 +68,7 @@ const ProjectsSection = () => {
     <section className="flex flex-col items-center relative text-black leading-none w-dvw bg-[#f4f4f4]">
       <div className="z-0 absolute w-full h-[10dvh] bg-linear-180 from-0% from-black/15 to-100% to-transparent"></div>
       <div className="flex flex-col justify-center items-center py-20">
-        <h2 className="font-inter text-[7rem] font-bold tracking-tighter">
+        <h2 className="font-inter text-4xl sm:text-5xl md:text-6xl lg:text-[7rem] font-bold tracking-tighter">
           MY PROJECTS
         </h2>
         <p className="font-inter text-3xl font-medium tracking-tighter">
@@ -79,7 +79,7 @@ const ProjectsSection = () => {
         </p>
       </div>
       <hr className="border-0 border-b-6 w-[90dvw]"></hr>
-      <div className="relative z-100 flex h-full py-16 px-12 gap-12">
+      <div className="relative z-100 flex h-full py-16 px-4 sm:px-8 md:px-12 gap-12">
         <div className="flex flex-col gap-2">
           {projects.map((curr, index) => {
             return (
@@ -99,13 +99,13 @@ const ProjectsSection = () => {
                     ref={(el) => {
                       textRefs.current[index] = el;
                     }}
-                    className="font-anton text-7xl decoration-4 underline underline-offset-4"
+                    className="font-anton text-2xl sm:text-3xl md:text-5xl lg:text-7xl decoration-4 underline underline-offset-4"
                     style={{ textDecorationColor: "transparent" }}
                   >
                     {curr.name.toLocaleUpperCase()}
                   </p>
                   <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4  border-black"></hr>
-                  <p className="font inter text-4xl font-bold tracking-tighter">
+                  <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
                     {curr.date}
                   </p>
                 </div>
@@ -137,30 +137,30 @@ const ProjectsSection = () => {
         </div>
       </div>
       <hr className="border-0 border-b-6 w-[90dvw]"></hr>
-      <div className="w-full py-16 px-12">
+      <div className="w-full py-16 px-4 sm:px-8 md:px-12">
         <div className="flex flex-col gap-8 px-8">
           <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-7xl decoration-4">TOTAL</p>
+            <p className="font-anton text-2xl sm:text-3xl md:text-5xl lg:text-7xl decoration-4">TOTAL</p>
             <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4  border-black"></hr>
-            <p className="font inter text-5xl font-bold tracking-tighter">
+            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-5xl font-bold tracking-tighter">
               {projects.length} PROJECTS
             </p>
           </div>
           <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-7xl decoration-4">
+            <p className="font-anton text-2xl sm:text-3xl md:text-5xl lg:text-7xl decoration-4">
               HOURS SPENT ON WYSIWYG
             </p>
             <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4  border-black"></hr>
-            <p className="font inter text-5xl font-bold tracking-tighter">
+            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-5xl font-bold tracking-tighter">
               2000+
             </p>
           </div>
           <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-7xl decoration-4">
+            <p className="font-anton text-2xl sm:text-3xl md:text-5xl lg:text-7xl decoration-4">
               COKE ZERO DRINKED
             </p>
             <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4  border-black"></hr>
-            <p className="font inter text-5xl font-bold tracking-tighter">
+            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-5xl font-bold tracking-tighter">
               100+
             </p>
           </div>
