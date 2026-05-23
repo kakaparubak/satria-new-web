@@ -5,9 +5,9 @@ import { FaLinkedinIn } from "react-icons/fa";
 
 const ContactSection = () => {
   return (
-    <section className="flex flex-col items-center justify-center h-dvh w-dvw bg-radial-[circle_at_50%_0%] from-blue-900 via-blue-300 to-blue-800 via-60% to-120%">
-      <div className="marquee-wrapper">
-        <div className="marquee-track">
+    <section className="relative flex flex-col items-center justify-center h-dvh w-dvw bg-radial-[circle_at_50%_0%] from-blue-900 via-blue-300 to-blue-800 via-60% to-120%">
+      <div className="marquee-wrapper absolute top-3">
+        <div className="animate-marquee-scroll flex gap-2">
           <p
             aria-hidden="true"
             className="marquee-content text-2xl"
@@ -15,7 +15,7 @@ const ContactSection = () => {
             SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA
             CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA
             SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA
-            CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA
+            CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA 
           </p>
           <p
             aria-hidden="true"
@@ -24,7 +24,7 @@ const ContactSection = () => {
             SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA
             CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA
             SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA
-            CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA
+            CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA SATRIA CHANDRA 
           </p>
         </div>
       </div>
