@@ -28,7 +28,7 @@ const SkillsSection = () => {
               src="https://res.cloudinary.com/dipyszxjg/image/upload/q_auto/f_auto/v1779016889/PDI_Main_photo_lorql0.png"
             ></img>
             <div className="flex justify-center items-center h-1/2 sm:h-full sm:w-1/2 bg-[#1B1B1B]">
-              <p className="leading-tight text-[#EAEAEA] p-[10%] font-inter text-right text-base sm:text-xl font-medium tracking-tighter">
+              <p className="leading-tight text-[#EAEAEA] p-[10%] font-inter text-left text-base sm:text-xl font-medium tracking-tighter">
                 Seeing the finished stage before construction even begins
               </p>
             </div>
