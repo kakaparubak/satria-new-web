@@ -8,6 +8,11 @@
   --font-inter: "Inter", sans-serif;
 }
 
+html,
+body {
+  overscroll-behavior: none;
+}
+
 /* Marquee animation */
 @keyframes marquee-scroll {
   from {
@@ -50,4 +55,3 @@ body.transitioning * {
   overflow-x: hidden !important;
   overflow-y: hidden !important;
 }
-
