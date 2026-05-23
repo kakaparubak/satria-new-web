@@ -8,12 +8,42 @@
   --font-inter: "Inter", sans-serif;
 }
 
-/* Hide scrollbars during section transitions */
-.expandable-section::-webkit-scrollbar {
-  display: none;
+/* Marquee animation */
+.marquee-wrapper {
+  position: absolute;
+  top: -0.75rem;
+  z-index: 50;
+  left: 0;
+  right: 0;
+  overflow: hidden;
 }
-.expandable-section {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: marquee-scroll 20s linear infinite;
+  will-change: transform;
+}
+
+.marquee-content {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }
 
