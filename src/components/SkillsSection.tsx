@@ -12,7 +12,7 @@ const SkillsSection = () => {
               src="https://res.cloudinary.com/dipyszxjg/image/upload/q_auto/f_auto/v1779017197/Sketch_Plot_RAMADHAN_JAZZ_ooxf67.png"
             ></img>
             <div className="flex justify-center items-center h-full w-1/2 bg-[#F3F3F3]">
-              <p className="leading-tight text-black p-[10%] font-inter text-right text-xl font-medium tracking-tighter">
+              <p className="leading-tight text-black p-[10%] font-inter text-right text-base sm:text-xl lg:text-xl font-medium tracking-tighter">
                 Utilizing WYSIWYG for precise dimensional accuracy and
                 high-fidelity fixture plotting
               </p>
@@ -22,7 +22,7 @@ const SkillsSection = () => {
         <div className="w-full h-full justify-center flex items-end gap-3 @container-size">
           <div className="shadow-[0_5px_20px_rgba(0,0,0,0.40)] w-1/2 h-full flex">
             <div className="flex justify-center items-center h-full w-1/2 bg-[#1B1B1B]">
-              <p className="leading-tight text-[#EAEAEA] p-[10%] font-inter text-left text-xl font-medium tracking-tighter">
+              <p className="leading-tight text-[#EAEAEA] p-[10%] font-inter text-left text-base sm:text-xl lg:text-xl font-medium tracking-tighter">
                 Seeing the finished stage before construction even begins
               </p>
             </div>
@@ -45,7 +45,7 @@ const SkillsSection = () => {
               src="https://res.cloudinary.com/dipyszxjg/image/upload/q_auto/f_auto/v1779017266/IMG_8797.JPG_n229yx.jpg"
             ></img>
             <div className="flex justify-center items-center h-full w-1/2 bg-[#1B1B1B]">
-              <p className="leading-tight text-[#EAEAEA] p-[10%] font-inter text-right text-xl font-medium tracking-tighter">
+              <p className="leading-tight text-[#EAEAEA] p-[10%] font-inter text-right text-base sm:text-xl lg:text-xl font-medium tracking-tighter">
                 Programming anywhere, from the home studio to the venue
               </p>
             </div>
@@ -54,7 +54,7 @@ const SkillsSection = () => {
         <div className="w-full h-full justify-center flex gap-3 @container-size">
           <div className="shadow-[0_5px_20px_rgba(0,0,0,0.40)] w-1/2 h-full flex">
             <div className="flex justify-center items-center h-full w-1/2 bg-[#F3F3F3]">
-              <p className="leading-tight text-black p-[10%] font-inter text-left text-xl font-medium tracking-tighter">
+              <p className="leading-tight text-black p-[10%] font-inter text-left text-base sm:text-xl lg:text-xl font-medium tracking-tighter">
                 It's not just about the console, it's about the craft
               </p>
             </div>
