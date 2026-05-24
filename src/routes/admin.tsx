@@ -1,23 +1,19 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { TinaCMS, TinaProvider } from 'tinacms'
-
-const cms = new TinaCMS({
-  clientId: process.env.TINA_CLIENT_ID,
-  token: process.env.TINA_TOKEN,
-  branch: 'main',
-})
+import { useEffect } from 'react'
 
 export const Route = createFileRoute('/admin')({
   component: AdminPage,
 })
 
 export default function AdminPage() {
+  useEffect(() => {
+    // Redirect to the statically generated TinaCMS admin
+    window.location.href = '/admin/'
+  }, [])
+
   return (
-    <TinaProvider cms={cms}>
-      <div style={{ padding: '2rem' }}>
-        <h1>TinaCMS Admin</h1>
-        <p>Loading TinaCMS...</p>
-      </div>
-    </TinaProvider>
+    <div style={{ padding: '2rem' }}>
+      <h1>Redirecting to TinaCMS Admin...</h1>
+    </div>
   )
 }
