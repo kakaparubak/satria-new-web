@@ -1,18 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
-import fs from "node:fs";
-import path from "node:path";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
+  loader: async () => {
+    const adminHtmlPath = join(process.cwd(), "public", "admin", "index.html");
+    const adminHtml = readFileSync(adminHtmlPath, "utf-8");
+    return { adminHtml };
+  },
 });
 
 function AdminPage() {
-  const adminHtmlPath = path.join(process.cwd(), "public", "admin", "index.html");
-  const adminHtml = fs.readFileSync(adminHtmlPath, "utf-8");
+  const data = Route.useLoaderData();
 
   return (
     <div
-      dangerouslySetInnerHTML={{ __html: adminHtml }}
+      dangerouslySetInnerHTML={{ __html: data.adminHtml }}
       className="tina-admin-wrapper"
     />
   );
