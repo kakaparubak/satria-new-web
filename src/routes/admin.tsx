@@ -1,22 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+
+const adminHtml = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/admin/assets/favicon-eb31bc17.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TinaCMS</title>
+    <script type="module" crossorigin src="/admin/assets/index-64f0607c.js"></script>
+    <link rel="stylesheet" href="/admin/assets/index-e2d6f2f7.css">
+  </head>
+  <body class="tina-tailwind">
+    <div id="root"></div>
+  </body>
+</html>`;
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
-  loader: async () => {
-    const adminHtmlPath = join(process.cwd(), "public", "admin", "index.html");
-    const adminHtml = readFileSync(adminHtmlPath, "utf-8");
-    return { adminHtml };
-  },
 });
 
 function AdminPage() {
-  const data = Route.useLoaderData();
-
   return (
     <div
-      dangerouslySetInnerHTML={{ __html: data.adminHtml }}
+      dangerouslySetInnerHTML={{ __html: adminHtml }}
       className="tina-admin-wrapper"
     />
   );
