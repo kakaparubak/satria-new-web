@@ -7,8 +7,8 @@
   },
   "scripts": {
     "prebuild": "bun run scripts/generate-data.ts",
-    "build": "bun run prebuild && vite build",
-    "dev": "vite",
+    "build": "tinacms build && bun run prebuild && vite build",
+    "dev": "tinacms dev -c \"vite\"",
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
