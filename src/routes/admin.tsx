@@ -1,11 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import adminHtml from "../../public/admin/index.html?raw";
+import fs from "node:fs";
+import path from "node:path";
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
 });
 
-export function AdminPage() {
+function AdminPage() {
+  const adminHtmlPath = path.join(process.cwd(), "public", "admin", "index.html");
+  const adminHtml = fs.readFileSync(adminHtmlPath, "utf-8");
+
   return (
     <div
       dangerouslySetInnerHTML={{ __html: adminHtml }}
