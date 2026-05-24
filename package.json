@@ -7,7 +7,7 @@
   },
   "scripts": {
     "prebuild": "bun run scripts/generate-data.ts",
-    "build": "tinacms build && bun run prebuild && vite build",
+    "build": "tinacms build --partial-reindex && bun run prebuild && vite build",
     "dev": "tinacms dev -c \"vite\"",
     "preview": "vite preview",
     "test": "vitest run",
