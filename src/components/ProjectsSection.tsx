@@ -157,11 +157,11 @@ const ProjectsSection = () => {
           </div>
           <div className="flex justify-between items-center gap-1.5 cursor-pointer">
             <p className="font-anton text-4xl md:text-5xl lg:text-7xl">
-              COKE ZERO DRANK
+              PEERS RAGEBAITED
             </p>
             <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4 border-black hidden md:block lg:block"></hr>
             <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
-              100+
+              UNCOUNTABLE
             </p>
           </div>
         </div>
