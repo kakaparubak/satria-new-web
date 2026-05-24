@@ -1,4 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { TinaCMS, TinaProvider } from 'tinacms'
+
+const cms = new TinaCMS({
+  clientId: process.env.TINA_CLIENT_ID,
+  token: process.env.TINA_TOKEN,
+  branch: 'main',
+})
 
 export const Route = createFileRoute('/admin')({
   component: AdminPage,
@@ -6,9 +13,11 @@ export const Route = createFileRoute('/admin')({
 
 export default function AdminPage() {
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>TinaCMS Admin</h1>
-      <p>Configure TinaCMS at tina.io to enable editing.</p>
-    </div>
+    <TinaProvider cms={cms}>
+      <div style={{ padding: '2rem' }}>
+        <h1>TinaCMS Admin</h1>
+        <p>Loading TinaCMS...</p>
+      </div>
+    </TinaProvider>
   )
 }

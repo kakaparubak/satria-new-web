@@ -5,40 +5,48 @@ export default defineConfig({
   clientId: process.env.TINA_CLIENT_ID!,
   token: process.env.TINA_TOKEN!,
   build: {
-    outputPath: '.tina/components',
+    outputFolder: 'admin',
     publicFolder: 'public',
   },
-  collections: [
-    {
-      name: 'projects',
-      label: 'Projects',
-      path: 'content/projects',
-      format: 'md',
-      fields: [
-        {
-          name: 'name',
-          label: 'Name',
-          type: 'string',
-        },
-        {
-          name: 'date',
-          label: 'Date',
-          type: 'string',
-        },
-        {
-          name: 'imgs',
-          label: 'Images',
-          type: 'list',
-          items: {
-            type: 'image',
-          },
-        },
-        {
-          name: 'desc',
-          label: 'Description',
-          type: 'text',
-        },
-      ],
+  media: {
+    tina: {
+      publicFolder: 'public',
+      mediaRoot: 'uploads',
     },
-  ],
+  },
+  schema: {
+    collections: [
+      {
+        name: 'projects',
+        label: 'Projects',
+        path: 'content/projects',
+        format: 'md',
+        fields: [
+          {
+            type: 'string',
+            name: 'name',
+            label: 'Name',
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: 'string',
+            name: 'date',
+            label: 'Date',
+          },
+          {
+            type: 'string',
+            name: 'imgs',
+            label: 'Images',
+            list: true,
+          },
+          {
+            type: 'string',
+            name: 'desc',
+            label: 'Description',
+          },
+        ],
+      },
+    ],
+  },
 })

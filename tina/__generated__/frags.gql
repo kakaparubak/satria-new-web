@@ -1,0 +1,7 @@
+fragment ProjectsParts on Projects {
+  __typename
+  name
+  date
+  imgs
+  desc
+}
