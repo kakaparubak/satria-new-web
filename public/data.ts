@@ -47,7 +47,7 @@ export const projects = [
   },
   {
     "id": 2,
-    "name": "Long Project Name 1",
+    "name": "Watsap brodie cuki titit",
     "date": "25/12/07",
     "imgs": [
       "https://res.cloudinary.com/dipyszxjg/image/upload/q_auto/f_auto/v1779016716/_RZL0332_cru3kx.jpg",
