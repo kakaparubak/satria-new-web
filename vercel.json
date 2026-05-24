@@ -1,14 +1,18 @@
 {
   "rewrites": [
     { "source": "/admin", "destination": "/admin/index.html" },
-    { "source": "/admin/:path*", "destination": "/admin/:path*" }
+    { "source": "/admin/assets/:path*", "destination": "/admin/assets/:path*" }
   ],
-  "headers": [
+  "routes": [
     {
-      "source": "/admin/assets/:path*",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
+      "src": "/admin/assets/:path*",
+      "dest": "/admin/assets/:path*",
+      "type": "rewrite"
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin/index.html",
+      "type": "rewrite"
     }
   ]
 }
