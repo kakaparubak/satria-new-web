@@ -1,9 +1,8 @@
-/**
- * TinaCMS Admin Route
- *
- * Minimal placeholder for the TinaCMS admin UI.
- * Full Tina admin requires setup with Tina Cloud for authentication.
- */
+import { createFileRoute } from '@tanstack/react-router'
+
+export const Route = createFileRoute('/admin')({
+  component: AdminPage,
+})
 
 export default function AdminPage() {
   return (
