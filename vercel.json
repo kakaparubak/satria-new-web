@@ -1,18 +1,7 @@
 {
-  "rewrites": [
-    { "source": "/admin", "destination": "/admin/index.html" },
-    { "source": "/admin/assets/:path*", "destination": "/admin/assets/:path*" }
-  ],
   "routes": [
-    {
-      "src": "/admin/assets/:path*",
-      "dest": "/admin/assets/:path*",
-      "type": "rewrite"
-    },
-    {
-      "src": "/admin",
-      "dest": "/admin/index.html",
-      "type": "rewrite"
-    }
+    { "src": "/admin/assets/:path*", "dest": "/admin/assets/:path*", "handle": "filesystem" },
+    { "src": "/admin", "dest": "/admin/index.html", "handle": "filesystem" },
+    { "src": "/admin/:path*", "dest": "/admin/:path*", "handle": "filesystem" }
   ]
 }
