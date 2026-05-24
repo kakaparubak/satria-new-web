@@ -1,12 +1,19 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { projects } from "../../public/data";
 import gsap from "gsap";
+import ImageLightbox from "#/components/ImageLightbox";
 
 const ProjectsSection = () => {
   const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const openState = useRef<boolean[]>(new Array(projects.length).fill(false));
+
+  // Lightbox state
+  const [activeImage, setActiveImage] = useState<{
+    src: string
+    originalRect: DOMRect
+  } | null>(null)
 
   const handleMouseEnter = (index: number) => {
     const trigger = triggerRefs.current[index];
@@ -81,7 +88,7 @@ const ProjectsSection = () => {
       <hr className="border-0 border-b-6 w-[90dvw]"></hr>
       <div className="relative z-100 flex h-full pt-12 pb-4 px-8 md:px-12 lg:px-20 gap-4 md:gap-10 lg:gap-12 no-vertical-scrollbar">
         <div className="flex flex-col gap-2">
-          {projects.map((curr, index) => {
+          {projects.slice().reverse().map((curr, index) => {
             return (
               <div
                 className="flex flex-col gap-6 md:gap-6 lg:gap-8 mouse-hover-detect"
@@ -120,8 +127,12 @@ const ProjectsSection = () => {
                     {curr.imgs.map((currImg, imgIndex) => {
                       return (
                         <img
-                          key = {`img-${imgIndex}`}
-                          className="rounded-lg object-contain h-[22dvh] md:h-[25dvh] lg:h-[30dvh]"
+                          key={`img-${imgIndex}`}
+                          onClick={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect()
+                            setActiveImage({ src: currImg, originalRect: rect })
+                          }}
+                          className="rounded-lg object-contain h-[22dvh] md:h-[25dvh] lg:h-[30dvh] cursor-zoom-in"
                           src={currImg}
                         ></img>
                       );
@@ -166,6 +177,13 @@ const ProjectsSection = () => {
           </div>
         </div>
       </div>
+      {activeImage && (
+        <ImageLightbox
+          src={activeImage.src}
+          originalRect={activeImage.originalRect}
+          onClose={() => setActiveImage(null)}
+        />
+      )}
     </section>
   );
 };
