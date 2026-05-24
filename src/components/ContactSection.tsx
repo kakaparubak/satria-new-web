@@ -8,17 +8,15 @@ const ContactSection = () => {
     <section className="relative flex flex-col items-center justify-center h-dvh w-dvw bg-radial-[circle_at_50%_0%] from-blue-900 via-blue-300 to-blue-800 via-60% to-120%">
       <div className="marquee-wrapper absolute top-0 z-50 left-0 right-0 overflow-hidden">
         <div className="text-5xl text-[#080228] font-inter font-medium tracking-[-0.08em] animate-marquee-scroll flex gap-2 flex-nowrap w-max">
-          <p
-            aria-hidden="true"
-            className="marquee-content p-0 m-0"
-          >
-            LIGHTING DESIGNER - CAM OPERATOR - STAGE DESIGNER - BURGER MUNCHER - LIGHTING DESIGNER - CAM OPERATOR - STAGE DESIGNER - BURGER MUNCHER -
+          <p aria-hidden="true" className="marquee-content p-0 m-0">
+            LIGHTING DESIGNER - LIGHTING PROGRAMMER - LIGHTING OPERATOR - SATRIA
+            CHANDRA - LIGHTING DESIGNER - LIGHTING PROGRAMMER - LIGHTING
+            OPERATOR - SATRIA CHANDRA -
           </p>
-          <p
-            aria-hidden="true"
-            className="marquee-content p-0 m-0"
-          >
-            LIGHTING DESIGNER - CAM OPERATOR - STAGE DESIGNER - BURGER MUNCHER - LIGHTING DESIGNER - CAM OPERATOR - STAGE DESIGNER - BURGER MUNCHER -
+          <p aria-hidden="true" className="marquee-content p-0 m-0">
+            LIGHTING DESIGNER - LIGHTING PROGRAMMER - LIGHTING OPERATOR - SATRIA
+            CHANDRA - LIGHTING DESIGNER - LIGHTING PROGRAMMER - LIGHTING
+            OPERATOR - SATRIA CHANDRA -
           </p>
         </div>
       </div>
