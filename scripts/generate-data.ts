@@ -24,6 +24,11 @@ const rcheckImages = [
 ];
 
 function generateData() {
+  if (!fs.existsSync(PROJECTS_DIR)) {
+    console.log(`Skipping: ${PROJECTS_DIR} does not exist`);
+    return;
+  }
+
   const files = fs.readdirSync(PROJECTS_DIR).filter((f) => f.endsWith(".md"));
 
   const projects = files
@@ -38,7 +43,11 @@ function generateData() {
         desc: data.desc,
       };
     })
-    .sort((a, b) => a.date - b.date);
+    .sort((a, b) => {
+      const [dayA, monthA, yearA] = a.date.split('/').map(Number)
+      const [dayB, monthB, yearB] = b.date.split('/').map(Number)
+      return new Date(yearB, monthB - 1, dayB).getTime() - new Date(yearA, monthA - 1, dayA).getTime()
+    });
 
   const output = `
 export const rcheckImages = ${JSON.stringify(rcheckImages, null, 2)}
