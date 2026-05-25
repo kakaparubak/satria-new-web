@@ -85,10 +85,10 @@ const ProjectsSection = () => {
           2005 Kid
         </p>
       </div>
-      <hr className="border-0 border-b-6 w-[90dvw]"></hr>
-      <div className="relative z-100 flex h-full pt-12 pb-4 px-8 md:px-12 lg:px-20 gap-4 md:gap-10 lg:gap-12 no-vertical-scrollbar">
-        <div className="flex flex-col gap-2">
-          {projects.slice().reverse().map((curr, index) => {
+      <hr className="border-0 border-b-6 w-[95dvw]"></hr>
+      <div className="relative z-100 flex h-full w-full pt-12 pb-4 px-8 md:px-12 lg:px-20 gap-4 md:gap-10 lg:gap-12 no-vertical-scrollbar">
+        <div className="flex w-full flex-col gap-2">
+          {projects.map((curr, index) => {
             return (
               <div
                 className="flex flex-col gap-6 md:gap-6 lg:gap-8 mouse-hover-detect"
@@ -147,7 +147,7 @@ const ProjectsSection = () => {
           })}
         </div>
       </div>
-      <hr className="border-0 border-b-6 w-[90dvw]"></hr>
+      <hr className="border-0 border-b-6 w-[95dvw]"></hr>
       <div className="w-full pt-12 pb-12 md:pb-16 lg:pb-16 px-8 md:px-12 lg:px-20">
         <div className="flex flex-col gap-6 md:gap-6 lg:gap-8">
           <div className="flex justify-between items-center gap-1.5 cursor-pointer">
