@@ -1,8 +1,9 @@
 ---
-name: Watsap brodie cuki titit
-date: 25/12/07
+name: Satria Selamat Lulus
+date: 25/05/2026
 imgs:
-  - "https://res.cloudinary.com/dipyszxjg/image/upload/q_auto/f_auto/v1779016716/_RZL0332_cru3kx.jpg"
-  - "https://res.cloudinary.com/dipyszxjg/image/upload/q_auto/f_auto/v1779016714/_RZL8664_eu59gw.jpg"
-desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis sem vel leo fermentum, at ultricies nisi aliquet. Sed vestibulum vel sem non egestas. Nullam a lacus metus."
+  - 'https://res.cloudinary.com/dipyszxjg/image/upload/q_auto/f_auto/v1779018534/20241026_204705_yqqrft.jpg'
+  - 'https://res.cloudinary.com/dipyszxjg/image/upload/q_auto/f_auto/v1779018532/20241026_191343_nfwvk8.jpg'
+desc: SUKSESS MASS
 ---
+
