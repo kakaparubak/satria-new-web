@@ -37,10 +37,10 @@ function generateData() {
       const fileContent = fs.readFileSync(filePath, "utf-8");
       const { data } = matter(fileContent);
       return {
-        name: data.name,
-        date: data.date,
-        imgs: data.imgs,
-        desc: data.desc,
+        name: data.name ?? "",
+        date: data.date ?? "",
+        imgs: data.imgs ?? [],
+        desc: data.desc ?? "",
       };
     })
     .sort((a, b) => {
