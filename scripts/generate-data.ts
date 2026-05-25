@@ -32,14 +32,13 @@ function generateData() {
       const fileContent = fs.readFileSync(filePath, "utf-8");
       const { data } = matter(fileContent);
       return {
-        id: parseInt(filename.replace("project-", "").replace(".md", "")),
         name: data.name,
         date: data.date,
         imgs: data.imgs,
         desc: data.desc,
       };
     })
-    .sort((a, b) => a.id - b.id);
+    .sort((a, b) => a.date - b.date);
 
   const output = `
 export const rcheckImages = ${JSON.stringify(rcheckImages, null, 2)}
