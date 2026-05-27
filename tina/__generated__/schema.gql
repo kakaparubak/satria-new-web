@@ -56,10 +56,13 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   projects(relativePath: String): Projects!
   projectsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProjectsFilter): ProjectsConnection!
+  redirects(relativePath: String): Redirects!
+  redirectsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: RedirectsFilter): RedirectsConnection!
 }
 
 input DocumentFilter {
   projects: ProjectsFilter
+  redirects: RedirectsFilter
 }
 
 type DocumentConnectionEdges {
@@ -85,7 +88,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Projects | Folder
+union DocumentNode = Projects | Redirects | Folder
 
 type Projects implements Node & Document {
   name: String!
@@ -122,6 +125,38 @@ type ProjectsConnection implements Connection {
   edges: [ProjectsConnectionEdges]
 }
 
+type RedirectsItems {
+  slug: String!
+  url: String!
+}
+
+type Redirects implements Node & Document {
+  items: [RedirectsItems]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input RedirectsItemsFilter {
+  slug: StringFilter
+  url: StringFilter
+}
+
+input RedirectsFilter {
+  items: RedirectsItemsFilter
+}
+
+type RedirectsConnectionEdges {
+  cursor: String!
+  node: Redirects
+}
+
+type RedirectsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [RedirectsConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -130,15 +165,19 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updateProjects(relativePath: String!, params: ProjectsMutation!): Projects!
   createProjects(relativePath: String!, params: ProjectsMutation!): Projects!
+  updateRedirects(relativePath: String!, params: RedirectsMutation!): Redirects!
+  createRedirects(relativePath: String!, params: RedirectsMutation!): Redirects!
 }
 
 input DocumentUpdateMutation {
   projects: ProjectsMutation
+  redirects: RedirectsMutation
   relativePath: String
 }
 
 input DocumentMutation {
   projects: ProjectsMutation
+  redirects: RedirectsMutation
 }
 
 input ProjectsMutation {
@@ -146,6 +185,15 @@ input ProjectsMutation {
   date: String
   imgs: [String]
   desc: String
+}
+
+input RedirectsItemsMutation {
+  slug: String
+  url: String
+}
+
+input RedirectsMutation {
+  items: [RedirectsItemsMutation]
 }
 
 schema {

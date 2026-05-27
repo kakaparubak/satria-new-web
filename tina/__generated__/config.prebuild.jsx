@@ -46,6 +46,36 @@ var config_default = defineConfig({
             label: "Description"
           }
         ]
+      },
+      {
+        name: "redirects",
+        label: "Redirects",
+        path: "content",
+        format: "md",
+        fields: [
+          {
+            type: "object",
+            name: "items",
+            label: "Redirects",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "slug",
+                label: "Slug",
+                description: "The path after /to/ (e.g., BinusFest, my-event-2024)",
+                required: true
+              },
+              {
+                type: "string",
+                name: "url",
+                label: "Redirect To",
+                description: "Full URL to redirect to (e.g., https://example.com)",
+                required: true
+              }
+            ]
+          }
+        ]
       }
     ]
   }

@@ -52,3 +52,58 @@ query projectsConnection($before: String, $after: String, $first: Float, $last: 
     }
   }
 }
+
+query redirects($relativePath: String!) {
+  redirects(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...RedirectsParts
+  }
+}
+
+query redirectsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: RedirectsFilter) {
+  redirectsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...RedirectsParts
+      }
+    }
+  }
+}

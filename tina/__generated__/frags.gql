@@ -5,3 +5,12 @@ fragment ProjectsParts on Projects {
   imgs
   desc
 }
+
+fragment RedirectsParts on Redirects {
+  __typename
+  items {
+    __typename
+    slug
+    url
+  }
+}

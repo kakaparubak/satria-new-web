@@ -14,6 +14,16 @@ export const ProjectsPartsFragmentDoc = gql`
   desc
 }
     `;
+export const RedirectsPartsFragmentDoc = gql`
+    fragment RedirectsParts on Redirects {
+  __typename
+  items {
+    __typename
+    slug
+    url
+  }
+}
+    `;
 export const ProjectsDocument = gql`
     query projects($relativePath: String!) {
   projects(relativePath: $relativePath) {
@@ -71,6 +81,63 @@ export const ProjectsConnectionDocument = gql`
   }
 }
     ${ProjectsPartsFragmentDoc}`;
+export const RedirectsDocument = gql`
+    query redirects($relativePath: String!) {
+  redirects(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...RedirectsParts
+  }
+}
+    ${RedirectsPartsFragmentDoc}`;
+export const RedirectsConnectionDocument = gql`
+    query redirectsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: RedirectsFilter) {
+  redirectsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...RedirectsParts
+      }
+    }
+  }
+}
+    ${RedirectsPartsFragmentDoc}`;
 export function getSdk(requester) {
   return {
     projects(variables, options) {
@@ -78,6 +145,12 @@ export function getSdk(requester) {
     },
     projectsConnection(variables, options) {
       return requester(ProjectsConnectionDocument, variables, options);
+    },
+    redirects(variables, options) {
+      return requester(RedirectsDocument, variables, options);
+    },
+    redirectsConnection(variables, options) {
+      return requester(RedirectsConnectionDocument, variables, options);
     }
   };
 }

@@ -84,6 +84,8 @@ export type Query = {
   document: DocumentNode;
   projects: Projects;
   projectsConnection: ProjectsConnection;
+  redirects: Redirects;
+  redirectsConnection: RedirectsConnection;
 };
 
 
@@ -122,8 +124,24 @@ export type QueryProjectsConnectionArgs = {
   filter?: InputMaybe<ProjectsFilter>;
 };
 
+
+export type QueryRedirectsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryRedirectsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<RedirectsFilter>;
+};
+
 export type DocumentFilter = {
   projects?: InputMaybe<ProjectsFilter>;
+  redirects?: InputMaybe<RedirectsFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -163,7 +181,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Projects | Folder;
+export type DocumentNode = Projects | Redirects | Folder;
 
 export type Projects = Node & Document & {
   __typename?: 'Projects';
@@ -203,6 +221,42 @@ export type ProjectsConnection = Connection & {
   edges?: Maybe<Array<Maybe<ProjectsConnectionEdges>>>;
 };
 
+export type RedirectsItems = {
+  __typename?: 'RedirectsItems';
+  slug: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type Redirects = Node & Document & {
+  __typename?: 'Redirects';
+  items?: Maybe<Array<Maybe<RedirectsItems>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type RedirectsItemsFilter = {
+  slug?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type RedirectsFilter = {
+  items?: InputMaybe<RedirectsItemsFilter>;
+};
+
+export type RedirectsConnectionEdges = {
+  __typename?: 'RedirectsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Redirects>;
+};
+
+export type RedirectsConnection = Connection & {
+  __typename?: 'RedirectsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<RedirectsConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -212,6 +266,8 @@ export type Mutation = {
   createFolder: DocumentNode;
   updateProjects: Projects;
   createProjects: Projects;
+  updateRedirects: Redirects;
+  createRedirects: Redirects;
 };
 
 
@@ -259,13 +315,27 @@ export type MutationCreateProjectsArgs = {
   params: ProjectsMutation;
 };
 
+
+export type MutationUpdateRedirectsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: RedirectsMutation;
+};
+
+
+export type MutationCreateRedirectsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: RedirectsMutation;
+};
+
 export type DocumentUpdateMutation = {
   projects?: InputMaybe<ProjectsMutation>;
+  redirects?: InputMaybe<RedirectsMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
   projects?: InputMaybe<ProjectsMutation>;
+  redirects?: InputMaybe<RedirectsMutation>;
 };
 
 export type ProjectsMutation = {
@@ -275,7 +345,18 @@ export type ProjectsMutation = {
   desc?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type RedirectsItemsMutation = {
+  slug?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type RedirectsMutation = {
+  items?: InputMaybe<Array<InputMaybe<RedirectsItemsMutation>>>;
+};
+
 export type ProjectsPartsFragment = { __typename: 'Projects', name: string, date?: string | null, imgs?: Array<string | null> | null, desc?: string | null };
+
+export type RedirectsPartsFragment = { __typename: 'Redirects', items?: Array<{ __typename: 'RedirectsItems', slug: string, url: string } | null> | null };
 
 export type ProjectsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -296,6 +377,25 @@ export type ProjectsConnectionQueryVariables = Exact<{
 
 export type ProjectsConnectionQuery = { __typename?: 'Query', projectsConnection: { __typename?: 'ProjectsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectsConnectionEdges', cursor: string, node?: { __typename: 'Projects', id: string, name: string, date?: string | null, imgs?: Array<string | null> | null, desc?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
+export type RedirectsQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type RedirectsQuery = { __typename?: 'Query', redirects: { __typename: 'Redirects', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'RedirectsItems', slug: string, url: string } | null> | null } };
+
+export type RedirectsConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<RedirectsFilter>;
+}>;
+
+
+export type RedirectsConnectionQuery = { __typename?: 'Query', redirectsConnection: { __typename?: 'RedirectsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'RedirectsConnectionEdges', cursor: string, node?: { __typename: 'Redirects', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'RedirectsItems', slug: string, url: string } | null> | null } | null } | null> | null } };
+
 export const ProjectsPartsFragmentDoc = gql`
     fragment ProjectsParts on Projects {
   __typename
@@ -303,6 +403,16 @@ export const ProjectsPartsFragmentDoc = gql`
   date
   imgs
   desc
+}
+    `;
+export const RedirectsPartsFragmentDoc = gql`
+    fragment RedirectsParts on Redirects {
+  __typename
+  items {
+    __typename
+    slug
+    url
+  }
 }
     `;
 export const ProjectsDocument = gql`
@@ -362,6 +472,63 @@ export const ProjectsConnectionDocument = gql`
   }
 }
     ${ProjectsPartsFragmentDoc}`;
+export const RedirectsDocument = gql`
+    query redirects($relativePath: String!) {
+  redirects(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...RedirectsParts
+  }
+}
+    ${RedirectsPartsFragmentDoc}`;
+export const RedirectsConnectionDocument = gql`
+    query redirectsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: RedirectsFilter) {
+  redirectsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...RedirectsParts
+      }
+    }
+  }
+}
+    ${RedirectsPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -370,6 +537,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     projectsConnection(variables?: ProjectsConnectionQueryVariables, options?: C): Promise<{data: ProjectsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectsConnectionQueryVariables, query: string}> {
         return requester<{data: ProjectsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectsConnectionQueryVariables, query: string}, ProjectsConnectionQueryVariables>(ProjectsConnectionDocument, variables, options);
+      },
+    redirects(variables: RedirectsQueryVariables, options?: C): Promise<{data: RedirectsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RedirectsQueryVariables, query: string}> {
+        return requester<{data: RedirectsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RedirectsQueryVariables, query: string}, RedirectsQueryVariables>(RedirectsDocument, variables, options);
+      },
+    redirectsConnection(variables?: RedirectsConnectionQueryVariables, options?: C): Promise<{data: RedirectsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RedirectsConnectionQueryVariables, query: string}> {
+        return requester<{data: RedirectsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RedirectsConnectionQueryVariables, query: string}, RedirectsConnectionQueryVariables>(RedirectsConnectionDocument, variables, options);
       }
     };
   }
