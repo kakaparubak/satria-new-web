@@ -58,6 +58,11 @@ export default defineConfig({
             name: "items",
             label: "Redirects",
             list: true,
+            ui: {
+              itemProps: (item: { slug?: string }) => ({
+                label: item?.slug ?? "Redirects Item",
+              }),
+            },
             fields: [
               {
                 type: "string",
@@ -66,7 +71,6 @@ export default defineConfig({
                 description:
                   "The path after /to/ (e.g., BinusFest, my-event-2024)",
                 required: true,
-                isTitle: true,
               },
               {
                 type: "string",
