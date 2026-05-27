@@ -58,14 +58,18 @@ var config_default = defineConfig({
             name: "items",
             label: "Redirects",
             list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.slug ?? "Redirects Item"
+              })
+            },
             fields: [
               {
                 type: "string",
                 name: "slug",
                 label: "Slug",
                 description: "The path after /to/ (e.g., BinusFest, my-event-2024)",
-                required: true,
-                isTitle: true
+                required: true
               },
               {
                 type: "string",
