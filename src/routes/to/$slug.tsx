@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { redirects } from "/data";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { redirects } from "../../../public/data";
 
 interface RedirectItem {
   slug: string;
@@ -9,20 +9,18 @@ interface RedirectItem {
 export const Route = createFileRoute("/to/$slug")({
   loader: ({ params }) => {
     const { slug } = params;
-    const match = (redirects as unknown as { items?: RedirectItem[] })?.items?.find((r) => r.slug === slug);
+    const match = (redirects as unknown as RedirectItem[]).find(
+      (r) => r.slug === slug
+    );
 
     if (match) {
-      return new Response(null, {
-        status: 302,
-        headers: { Location: match.url },
+      throw redirect({
+        href: match.url,
+      });
+    } else {
+      throw redirect({
+        to: "/",
       });
     }
-
-    // Fallback: redirect to home
-    return new Response(null, {
-      status: 302,
-      headers: { Location: "/" },
-    });
   },
 });
-

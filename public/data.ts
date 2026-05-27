@@ -84,5 +84,9 @@ export const redirects = [
   {
     "slug": "test-redirect",
     "url": "https://example.com"
+  },
+  {
+    "slug": "yt",
+    "url": "https://youtube.com"
   }
 ]
