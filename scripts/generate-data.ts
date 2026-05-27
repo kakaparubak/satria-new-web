@@ -4,6 +4,7 @@ import matter from "gray-matter";
 
 const PROJECTS_DIR = path.join(process.cwd(), "content/projects");
 const OUTPUT_FILE = path.join(process.cwd(), "public/data.ts");
+const REDIRECTS_FILE = path.join(process.cwd(), "content/redirects.md");
 
 const rcheckImages = [
   {
@@ -49,14 +50,24 @@ function generateData() {
       return new Date(yearB, monthB - 1, dayB).getTime() - new Date(yearA, monthA - 1, dayA).getTime()
     });
 
+  // Read redirects from content/redirects.md
+  let redirects: { slug: string; url: string }[] = [];
+  if (fs.existsSync(REDIRECTS_FILE)) {
+    const redirectsContent = fs.readFileSync(REDIRECTS_FILE, "utf-8");
+    const { data } = matter(redirectsContent);
+    redirects = data.items ?? [];
+  }
+
   const output = `
 export const rcheckImages = ${JSON.stringify(rcheckImages, null, 2)}
 
 export const projects = ${JSON.stringify(projects, null, 2)}
+
+export const redirects = ${JSON.stringify(redirects, null, 2)}
 `;
 
   fs.writeFileSync(OUTPUT_FILE, output, "utf-8");
-  console.log(`Generated ${OUTPUT_FILE} with ${projects.length} projects`);
+  console.log(`Generated ${OUTPUT_FILE} with ${projects.length} projects and ${redirects.length} redirects`);
 }
 
 generateData();

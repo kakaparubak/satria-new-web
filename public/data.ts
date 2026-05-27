@@ -79,3 +79,10 @@ export const projects = [
     "desc": ""
   }
 ]
+
+export const redirects = [
+  {
+    "slug": "test-redirect",
+    "url": "https://example.com"
+  }
+]
