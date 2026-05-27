@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { redirects } from "../../public/data";
+import { redirects } from "/data";
 
 interface RedirectItem {
   slug: string;
