@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import fs from "fs";
 import path from "path";
 
@@ -42,14 +42,17 @@ export const Route = createFileRoute("/to/$slug")({
     const match = redirects.find((r) => r.slug === slug);
 
     if (match) {
-      throw redirect(match.url);
+      return new Response(null, {
+        status: 302,
+        headers: { Location: match.url },
+      });
     }
 
     // Fallback: redirect to home
-    throw redirect("/");
+    return new Response(null, {
+      status: 302,
+      headers: { Location: "/" },
+    });
   },
 });
 
-function RedirectPage() {
-  return null;
-}
