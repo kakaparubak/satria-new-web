@@ -14,7 +14,9 @@
       "mcp__MiniMax__understand_image",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(npx tsx *)"
+      "Bash(npx tsx *)",
+      "Bash(mkdir -p \"C:/Users/abdel/Documents/Coding/satria-new-web-backup/docs/superpowers/specs\")",
+      "Bash(npx tsc *)"
     ]
   }
 }

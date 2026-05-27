@@ -19,14 +19,56 @@ export const rcheckImages = [
 
 export const projects = [
   {
+    "name": "Rich Brian in Jakarta 2025",
+    "date": "29/11/2025",
+    "imgs": [],
+    "desc": ""
+  },
+  {
+    "name": "TV Commercial Sirup Marjan",
+    "date": "06/11/2025",
+    "imgs": [],
+    "desc": ""
+  },
+  {
+    "name": "Scream Or Dance 2025",
+    "date": "31/10/2025",
+    "imgs": [],
+    "desc": ""
+  },
+  {
+    "name": "Foo Fighter in Jakarta",
+    "date": "02/10/2025",
+    "imgs": [],
+    "desc": ""
+  },
+  {
+    "name": "MUSE in Jakarta 2025",
+    "date": "19/09/2025",
+    "imgs": [],
+    "desc": ""
+  },
+  {
     "name": "Konser Jumbo 2025",
     "date": "17/08/2025",
     "imgs": [],
     "desc": ""
   },
   {
+    "name": "School Of Rock (Rerun 2025)",
+    "date": "27/07/2025",
+    "imgs": [],
+    "desc": ""
+  },
+  {
     "name": "Green Day In Jakarta 2025",
     "date": "15/02/2025",
+    "imgs": [],
+    "desc": ""
+  },
+  {
+    "name": "Dangdut Musikal (FMI Version) 2024",
+    "date": "26/10/2024",
     "imgs": [],
     "desc": ""
   },
