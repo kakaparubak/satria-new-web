@@ -82,11 +82,7 @@ export const projects = [
 
 export const redirects = [
   {
-    "slug": "test-redirect",
-    "url": "https://example.com"
-  },
-  {
-    "slug": "yt",
-    "url": "https://youtube.com"
+    "slug": "BinusianBeachFestival2026",
+    "url": "https://drive.google.com/drive/folders/1BtOPjoVkMqZh03hVyRnwfNqcl7sYaeuw?usp=sharing"
   }
 ]

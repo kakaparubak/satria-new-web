@@ -66,6 +66,7 @@ export default defineConfig({
                 description:
                   "The path after /to/ (e.g., BinusFest, my-event-2024)",
                 required: true,
+                isTitle: true,
               },
               {
                 type: "string",

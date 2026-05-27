@@ -64,7 +64,8 @@ var config_default = defineConfig({
                 name: "slug",
                 label: "Slug",
                 description: "The path after /to/ (e.g., BinusFest, my-event-2024)",
-                required: true
+                required: true,
+                isTitle: true
               },
               {
                 type: "string",
