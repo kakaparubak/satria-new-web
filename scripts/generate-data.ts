@@ -51,7 +51,7 @@ function generateData() {
     });
 
   // Read redirects from content/redirects.md
-  let redirects: { slug: string; url: string }[] = [];
+  let redirects: Array<{ slug: string; url: string; img?: string; text?: string }> = [];
   if (fs.existsSync(REDIRECTS_FILE)) {
     const redirectsContent = fs.readFileSync(REDIRECTS_FILE, "utf-8");
     const { data } = matter(redirectsContent);
@@ -64,6 +64,17 @@ export const rcheckImages = ${JSON.stringify(rcheckImages, null, 2)}
 export const projects = ${JSON.stringify(projects, null, 2)}
 
 export const redirects = ${JSON.stringify(redirects, null, 2)}
+
+export type Redirect = {
+  slug: string;
+  url: string;
+  img?: string;
+  text?: string;
+};
+
+export function findRedirect(slug: string): Redirect | undefined {
+  return redirects.find(r => r.slug === slug);
+}
 `;
 
   fs.writeFileSync(OUTPUT_FILE, output, "utf-8");
