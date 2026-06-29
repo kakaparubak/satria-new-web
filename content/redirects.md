@@ -10,8 +10,11 @@ items:
     url: 'https://drive.google.com/drive/folders/1TncxzAk7FrAsh1ZWCSzpji5q42FeWLbc?usp=sharing'
   - slug: hello
     url: 'https://whatsapp.com'
+    img: 'https://res.cloudinary.com/dtifsddyf/image/upload/v1778841989/20260502_124931_enpdxp.jpg'
+    text: DADANG
   - slug: sample
     url: 'https://example.com'
     img: 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=1600'
-    text: 'You are being redirected to the example page. Thanks for clicking!'
+    text: You are being redirected to the example page. Thanks for clicking!
 ---
+
