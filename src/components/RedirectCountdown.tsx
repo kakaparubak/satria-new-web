@@ -126,7 +126,7 @@ export default function RedirectCountdown({ slug, url, img, text }: RedirectCoun
                   fontWeight: 700,
                 }}
               >
-                Redirecting to {slug}
+                You will be redirected to {slug} folder
               </div>
               <div
                 style={{
@@ -138,7 +138,7 @@ export default function RedirectCountdown({ slug, url, img, text }: RedirectCoun
                   marginTop: 4,
                 }}
               >
-                Beralih ke {slug}
+                Anda akan dialihkan ke folder {slug}
               </div>
             </div>
           )}
