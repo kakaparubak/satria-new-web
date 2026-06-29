@@ -21,6 +21,8 @@ export const RedirectsPartsFragmentDoc = gql`
     __typename
     slug
     url
+    img
+    text
   }
 }
     `;

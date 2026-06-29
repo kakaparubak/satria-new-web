@@ -77,6 +77,20 @@ var config_default = defineConfig({
                 label: "Redirect To",
                 description: "Full URL to redirect to (e.g., https://example.com)",
                 required: true
+              },
+              {
+                type: "string",
+                label: "Redirect Img",
+                name: "img",
+                description: "Full URL to image shown during countdown. Optional.",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                label: "Redirect Text",
+                name: "text",
+                description: "Text shown during countdown. Optional.",
+                ui: { component: "textarea" }
               }
             ]
           }

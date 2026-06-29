@@ -225,6 +225,8 @@ export type RedirectsItems = {
   __typename?: 'RedirectsItems';
   slug: Scalars['String']['output'];
   url: Scalars['String']['output'];
+  img?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
 };
 
 export type Redirects = Node & Document & {
@@ -238,6 +240,8 @@ export type Redirects = Node & Document & {
 export type RedirectsItemsFilter = {
   slug?: InputMaybe<StringFilter>;
   url?: InputMaybe<StringFilter>;
+  img?: InputMaybe<StringFilter>;
+  text?: InputMaybe<StringFilter>;
 };
 
 export type RedirectsFilter = {
@@ -348,6 +352,8 @@ export type ProjectsMutation = {
 export type RedirectsItemsMutation = {
   slug?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
+  img?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type RedirectsMutation = {
@@ -356,7 +362,7 @@ export type RedirectsMutation = {
 
 export type ProjectsPartsFragment = { __typename: 'Projects', name: string, date?: string | null, imgs?: Array<string | null> | null, desc?: string | null };
 
-export type RedirectsPartsFragment = { __typename: 'Redirects', items?: Array<{ __typename: 'RedirectsItems', slug: string, url: string } | null> | null };
+export type RedirectsPartsFragment = { __typename: 'Redirects', items?: Array<{ __typename: 'RedirectsItems', slug: string, url: string, img?: string | null, text?: string | null } | null> | null };
 
 export type ProjectsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -382,7 +388,7 @@ export type RedirectsQueryVariables = Exact<{
 }>;
 
 
-export type RedirectsQuery = { __typename?: 'Query', redirects: { __typename: 'Redirects', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'RedirectsItems', slug: string, url: string } | null> | null } };
+export type RedirectsQuery = { __typename?: 'Query', redirects: { __typename: 'Redirects', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'RedirectsItems', slug: string, url: string, img?: string | null, text?: string | null } | null> | null } };
 
 export type RedirectsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -394,7 +400,7 @@ export type RedirectsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type RedirectsConnectionQuery = { __typename?: 'Query', redirectsConnection: { __typename?: 'RedirectsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'RedirectsConnectionEdges', cursor: string, node?: { __typename: 'Redirects', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'RedirectsItems', slug: string, url: string } | null> | null } | null } | null> | null } };
+export type RedirectsConnectionQuery = { __typename?: 'Query', redirectsConnection: { __typename?: 'RedirectsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'RedirectsConnectionEdges', cursor: string, node?: { __typename: 'Redirects', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'RedirectsItems', slug: string, url: string, img?: string | null, text?: string | null } | null> | null } | null } | null> | null } };
 
 export const ProjectsPartsFragmentDoc = gql`
     fragment ProjectsParts on Projects {
@@ -412,6 +418,8 @@ export const RedirectsPartsFragmentDoc = gql`
     __typename
     slug
     url
+    img
+    text
   }
 }
     `;

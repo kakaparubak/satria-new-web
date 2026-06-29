@@ -128,6 +128,8 @@ type ProjectsConnection implements Connection {
 type RedirectsItems {
   slug: String!
   url: String!
+  img: String
+  text: String
 }
 
 type Redirects implements Node & Document {
@@ -140,6 +142,8 @@ type Redirects implements Node & Document {
 input RedirectsItemsFilter {
   slug: StringFilter
   url: StringFilter
+  img: StringFilter
+  text: StringFilter
 }
 
 input RedirectsFilter {
@@ -190,6 +194,8 @@ input ProjectsMutation {
 input RedirectsItemsMutation {
   slug: String
   url: String
+  img: String
+  text: String
 }
 
 input RedirectsMutation {

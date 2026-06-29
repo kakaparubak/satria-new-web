@@ -12,5 +12,7 @@ fragment RedirectsParts on Redirects {
     __typename
     slug
     url
+    img
+    text
   }
 }
