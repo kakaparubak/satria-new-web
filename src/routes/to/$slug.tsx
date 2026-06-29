@@ -1,26 +1,25 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { redirects } from "../../../public/data";
-
-interface RedirectItem {
-  slug: string;
-  url: string;
-}
+import { createFileRoute, notFound } from "@tanstack/react-router";
+import { findRedirect } from "../../../public/data";
+import RedirectCountdown from "#/components/RedirectCountdown";
 
 export const Route = createFileRoute("/to/$slug")({
   loader: ({ params }) => {
-    const { slug } = params;
-    const match = (redirects as unknown as RedirectItem[]).find(
-      (r) => r.slug === slug
-    );
-
-    if (match) {
-      throw redirect({
-        href: match.url,
-      });
-    } else {
-      throw redirect({
-        to: "/",
-      });
-    }
+    const redirect = findRedirect(params.slug);
+    if (!redirect) throw notFound();
+    return redirect;
   },
+  component: ToSlugPage,
+  notFoundComponent: () => <div>Redirect not found.</div>,
 });
+
+function ToSlugPage() {
+  const redirect = Route.useLoaderData();
+  return (
+    <RedirectCountdown
+      slug={redirect.slug}
+      url={redirect.url}
+      img={redirect.img}
+      text={redirect.text}
+    />
+  );
+}
