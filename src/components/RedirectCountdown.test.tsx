@@ -24,10 +24,10 @@ describe("RedirectCountdown", () => {
     expect(screen.getByText("Heading text")).toBeInTheDocument();
   });
 
-  it("does not render a text block when text is omitted", () => {
-    const { container } = render(<RedirectCountdown slug="hello" url="https://example.com" />);
-    // The component uses a specific data-testid on the text block when present
-    expect(container.querySelector("[data-testid='redirect-text']")).toBeNull();
+  it("renders default English/Indonesian text when text is omitted", () => {
+    render(<RedirectCountdown slug="hello" url="https://example.com" />);
+    expect(screen.getByText("Redirecting to hello")).toBeInTheDocument();
+    expect(screen.getByText("Beralih ke hello")).toBeInTheDocument();
   });
 
   it("applies the img URL as a background image when provided", () => {

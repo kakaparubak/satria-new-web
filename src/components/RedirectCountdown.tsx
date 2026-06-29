@@ -102,19 +102,44 @@ export default function RedirectCountdown({ slug, url, img, text }: RedirectCoun
             fontFamily: "Inter, sans-serif",
           }}
         >
-          {text && (
+          {text ? (
             <div
               data-testid="redirect-text"
               style={{
-                fontFamily: "Georgia, serif",
-                fontSize: 20,
-                lineHeight: 1.35,
+                fontFamily: "Oswald, sans-serif",
+                fontSize: 22,
+                lineHeight: 1.3,
                 marginBottom: 24,
-                fontWeight: 500,
+                fontWeight: 600,
                 maxWidth: 780,
               }}
             >
               {text}
+            </div>
+          ) : (
+            <div data-testid="redirect-text" style={{ marginBottom: 24, maxWidth: 780 }}>
+              <div
+                style={{
+                  fontFamily: "Oswald, sans-serif",
+                  fontSize: 22,
+                  lineHeight: 1.3,
+                  fontWeight: 700,
+                }}
+              >
+                Redirecting to {slug}
+              </div>
+              <div
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 14,
+                  lineHeight: 1.4,
+                  fontWeight: 400,
+                  opacity: 0.75,
+                  marginTop: 4,
+                }}
+              >
+                Beralih ke {slug}
+              </div>
             </div>
           )}
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
