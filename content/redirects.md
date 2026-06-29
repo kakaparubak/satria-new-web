@@ -6,6 +6,7 @@ items:
     url: 'https://drive.google.com/drive/folders/1bu4ZJIeQmKyTLylffjt-3pbzw4LiMwYR?usp=sharing'
   - slug: FashionShowGrandSahidPDI
     url: 'https://drive.google.com/drive/folders/1fPYin62Tmvj4pP49w-PnSFiUkqb8PciZ?usp=sharing'
+    img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1782760528/VER_2_FRONT_e6zybg.png'
   - slug: FinalMastercardSoundOn
     url: 'https://drive.google.com/drive/folders/1TncxzAk7FrAsh1ZWCSzpji5q42FeWLbc?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1782760426/RENDER_FRONT_VER3_nrvbw7.png'
