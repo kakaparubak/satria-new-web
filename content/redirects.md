@@ -8,6 +8,7 @@ items:
     url: 'https://drive.google.com/drive/folders/1fPYin62Tmvj4pP49w-PnSFiUkqb8PciZ?usp=sharing'
   - slug: FinalMastercardSoundOn
     url: 'https://drive.google.com/drive/folders/1TncxzAk7FrAsh1ZWCSzpji5q42FeWLbc?usp=sharing'
+    img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1782760426/RENDER_FRONT_VER3_nrvbw7.png'
   - slug: hello
     url: 'https://whatsapp.com'
     img: 'https://res.cloudinary.com/dtifsddyf/image/upload/v1778841989/20260502_124931_enpdxp.jpg'
