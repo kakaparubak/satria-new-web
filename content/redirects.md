@@ -19,7 +19,7 @@ items:
     img: 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=1600'
     text: You are being redirected to the example page. Thanks for clicking!
   - slug: KoprsKadetIndoArena
-    url: 'https://drive.google.com/drive/folders/1sqCFOtC8nCSQIbTQm-zxPyFCE1HMp7Hf?usp=sharing'
+    url: 'https://drive.google.com/drive/folders/12jMsbIHmjKYQTaXbpDxS5qk530Z0mRPZ?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1783265966/Render_Tribune_Tengah_zmrzrr.png'
 ---
 
