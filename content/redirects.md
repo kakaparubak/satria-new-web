@@ -21,5 +21,8 @@ items:
   - slug: KoprsKadetIndoArena
     url: 'https://drive.google.com/drive/folders/12jMsbIHmjKYQTaXbpDxS5qk530Z0mRPZ?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1783265966/Render_Tribune_Tengah_zmrzrr.png'
+    text: |-
+      Progress : 05/07/2026 - Render 3D Ver 1
+      Up Comming : PDF Final Ver 1
 ---
 
