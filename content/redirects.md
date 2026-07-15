@@ -23,8 +23,8 @@ items:
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1783265966/Render_Tribune_Tengah_zmrzrr.png'
     text: ''
   - slug: PKB28th
-    url: 'https://drive.google.com/drive/folders/1u08lFqVufymkFIpuvg09q2teq0x2Ho-V?usp=sharing'
-    img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1783283341/Render_Front_b9yc2k.png'
+    url: 'https://drive.google.com/drive/folders/1o1RIEaZCpERw9upgqXKtI3nz66PaDMhp?usp=sharing'
+    img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1784097088/Render_Front_azvzuh.png'
   - slug: Rafa2026
     url: 'https://drive.google.com/drive/folders/1vysqxx08xoCWen-23yLLFjyOkVJ7x7Z_?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1783556742/Front_i2zplt.png'
