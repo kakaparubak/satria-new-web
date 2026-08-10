@@ -28,7 +28,7 @@ items:
   - slug: Rafa2026
     url: 'https://drive.google.com/drive/folders/1vysqxx08xoCWen-23yLLFjyOkVJ7x7Z_?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1783556742/Front_i2zplt.png'
-  - slug: KKI2026
+  - slug: HakimMunir-KKI2026
     url: 'https://drive.google.com/drive/folders/1WOtlIhR-oVuGkoZDtOobdalLMwB2tahr?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1786372254/Front_Render_nf3ul4.png'
 ---
