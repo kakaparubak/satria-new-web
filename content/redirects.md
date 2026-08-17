@@ -31,5 +31,8 @@ items:
   - slug: HakimMunir-KKI2026
     url: 'https://drive.google.com/drive/folders/1WOtlIhR-oVuGkoZDtOobdalLMwB2tahr?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1786372254/Front_Render_nf3ul4.png'
+  - slug: RCCherryPopPrevizKit
+    url: 'https://drive.google.com/drive/folders/1tqF8CEwMp5NWdYqG8nleqPMoTY2FHOGY?usp=sharing'
+    img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1786984729/ON_MY_OWN_sqtnqw.png'
 ---
 
