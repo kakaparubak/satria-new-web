@@ -34,7 +34,7 @@ items:
   - slug: RCCherryPopPrevizKit
     url: 'https://drive.google.com/drive/folders/1tqF8CEwMp5NWdYqG8nleqPMoTY2FHOGY?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1786984729/ON_MY_OWN_sqtnqw.png'
-  - slug: RCZeppLighting
+  - slug: RCZeppLightingKit
     url: 'https://drive.google.com/drive/folders/1Q25Uuh4K6JPUXL1PG348Fn2MylIkk7fh?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1793108082/Screenshot_2026-10-27_203244_qoa0fk.png'
 ---
