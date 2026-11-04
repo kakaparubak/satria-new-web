@@ -40,7 +40,7 @@ items:
   - slug: SOD2026-LightingKit
     url: 'https://drive.google.com/drive/folders/1frr9nwIArj0sjbY99bt1kOCb4c89fbOX?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1793167702/ds5fDFvvxY_esv1sq.webp'
-  - slug: nedent-pacto
+  - slug: neodent-pacto
     url: 'https://drive.google.com/drive/folders/15ZjWw-tqY3bZ0f1ZE14mMeNNu3s00pDZ?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1793793405/RENDER_1_LEFT_hzy9qr.jpg'
 ---
