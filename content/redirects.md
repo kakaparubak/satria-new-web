@@ -43,5 +43,8 @@ items:
   - slug: neodent-pacto
     url: 'https://drive.google.com/drive/folders/15ZjWw-tqY3bZ0f1ZE14mMeNNu3s00pDZ?usp=sharing'
     img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1793793405/RENDER_1_LEFT_hzy9qr.jpg'
+  - slug: MCRJakartaLightingKit
+    url: 'https://drive.google.com/drive/folders/1rL6-tYuIKAxbgq5vvCnSQkqSv_M56Hct?usp=sharing'
+    img: 'https://res.cloudinary.com/dipyszxjg/image/upload/v1794756182/MCR_LIGHTING_PLOT_VER_Alpha_1.6_2_xzfxuh.jpg'
 ---
 
