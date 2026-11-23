@@ -11,9 +11,9 @@ const ProjectsSection = () => {
 
   // Lightbox state
   const [activeImage, setActiveImage] = useState<{
-    src: string
-    originalRect: DOMRect
-  } | null>(null)
+    src: string;
+    originalRect: DOMRect;
+  } | null>(null);
 
   const handleMouseEnter = (index: number) => {
     const trigger = triggerRefs.current[index];
@@ -21,9 +21,8 @@ const ProjectsSection = () => {
     const textEl = textRefs.current[index];
     if (!trigger || !panel) return;
 
-    gsap.killTweensOf(panel);
-
     if (!openState.current[index]) {
+      gsap.killTweensOf(panel);
       openState.current[index] = true;
       const tl = gsap.timeline();
       tl.set(panel, { height: "auto", visibility: "visible" }).fromTo(
@@ -93,8 +92,17 @@ const ProjectsSection = () => {
               <div
                 className="flex flex-col gap-6 md:gap-6 lg:gap-8 mouse-hover-detect"
                 key={`project-${index}`}
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={() => handleMouseLeave(index)}
+                onMouseEnter={() => {
+                  handleMouseEnter(index);
+                }}
+                onTouchStart={() => {
+                  handleMouseEnter(index);
+                }}
+                onPointerLeave={(event) => {
+                  // Touch browsers synthesize mouse-leave after a tap; do not
+                  // immediately collapse the gallery the visitor just opened.
+                  if (event.pointerType !== "touch") handleMouseLeave(index);
+                }}
               >
                 <div
                   ref={(el) => {
@@ -129,11 +137,15 @@ const ProjectsSection = () => {
                         <img
                           key={`img-${imgIndex}`}
                           onClick={(e) => {
-                            const rect = e.currentTarget.getBoundingClientRect()
-                            setActiveImage({ src: currImg, originalRect: rect })
+                            const rect =
+                              e.currentTarget.getBoundingClientRect();
+                            setActiveImage({
+                              src: currImg,
+                              originalRect: rect,
+                            });
                           }}
                           className="rounded-lg object-contain h-[22dvh] md:h-[25dvh] lg:h-[30dvh] cursor-zoom-in"
-                          src={currImg}
+                          data-src={currImg}
                         ></img>
                       );
                     })}
@@ -151,7 +163,9 @@ const ProjectsSection = () => {
       <div className="w-full pt-12 pb-12 md:pb-16 lg:pb-16 px-8 md:px-12 lg:px-20">
         <div className="flex flex-col gap-6 md:gap-6 lg:gap-8">
           <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-4xl md:text-5xl lg:text-7xl decoration-4">TOTAL</p>
+            <p className="font-anton text-4xl md:text-5xl lg:text-7xl decoration-4">
+              TOTAL
+            </p>
             <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4 border-black hidden md:block lg:block"></hr>
             <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
               {projects.length} PROJECTS

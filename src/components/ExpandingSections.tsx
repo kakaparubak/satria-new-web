@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import Logo from "./Logo";
+import { createOrderedMediaLoader } from "./orderedMedia";
 
 gsap.registerPlugin(useGSAP);
 
@@ -70,6 +70,11 @@ const animatePanels = (
 
 const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const mediaLoader = React.useRef<ReturnType<
+    typeof createOrderedMediaLoader
+  > | null>(null);
+  const prepareSection = (index: number) =>
+    mediaLoader.current?.prioritize(index);
   const [isSectionActive, setisSectionActive] = useState<boolean>(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const refs = React.useRef<(HTMLDivElement | null)[]>([]);
@@ -105,6 +110,16 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
       }
     }
   }, [activeIndex]);
+
+  React.useEffect(() => {
+    if (!containerRef.current) return;
+    const loader = createOrderedMediaLoader(containerRef.current);
+    mediaLoader.current = loader;
+    return () => {
+      loader.dispose();
+      mediaLoader.current = null;
+    };
+  }, []);
 
   const handleMouseEnterLabel = (index: number) => {
     const label = labelRefs.current[index];
@@ -168,8 +183,14 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
     setActiveIndex(-1);
     Promise.all(
       refs.current.map((el) =>
-        el ? gsap.to(el, { height: "calc(100dvh / 6)", duration: 0.5, ease: "power2.inOut" }) : Promise.resolve()
-      )
+        el
+          ? gsap.to(el, {
+              height: "calc(100dvh / 6)",
+              duration: 0.5,
+              ease: "power2.inOut",
+            })
+          : Promise.resolve(),
+      ),
     ).then(() => {
       isTransitioning.current = false;
       document.body.classList.remove("transitioning");
@@ -184,6 +205,7 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
 
   const handlePanelClick = (index: number) => {
     if (activeIndex === -1) {
+      prepareSection(index);
       isTransitioning.current = true;
       document.body.classList.add("transitioning");
 
@@ -322,6 +344,7 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
                 handleOpenMenu();
                 return;
               }
+              prepareSection(index - 1);
               animatePanels(
                 refs.current[index]!,
                 refs.current[index - 1]!,
@@ -343,6 +366,7 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
                 handleOpenMenu();
                 return;
               }
+              prepareSection(index + 1);
               animatePanels(
                 refs.current[index]!,
                 refs.current[index + 1]!,
@@ -405,6 +429,7 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
                 handleOpenMenu();
                 return;
               }
+              prepareSection(index + 1);
               animatePanels(
                 refs.current[index]!,
                 refs.current[index + 1]!,
@@ -422,6 +447,7 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
                 handleOpenMenu();
                 return;
               }
+              prepareSection(index - 1);
               animatePanels(
                 refs.current[index]!,
                 refs.current[index - 1]!,
@@ -459,10 +485,11 @@ const ExpandingSections = ({ sections }: ExpandingSectionsProps) => {
             />
           </div>
           <div
+            data-media-section={index}
             className={`absolute inset-0 z-20 overflow-y-auto transition-opacity duration-300 h-full expandable-section ${activeIndex === -1 ? "opacity-100 pointer-events-none" : "opacity-100"}`}
             onClick={(e) => e.stopPropagation()}
           >
-            {(activeIndex !== -1 || !isSectionActive) && section.content}
+            {section.content}
           </div>
         </div>
       ))}
