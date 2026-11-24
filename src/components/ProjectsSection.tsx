@@ -7,7 +7,10 @@ const ProjectsSection = () => {
   const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  const openState = useRef<boolean[]>(new Array(projects.length).fill(false));
+  const openState = useRef<boolean[]>(projects.map((_, index) => index === 0));
+  const [expandedProjects, setExpandedProjects] = useState(() =>
+    projects.map((_, index) => index === 0),
+  );
 
   // Lightbox state
   const [activeImage, setActiveImage] = useState<{
@@ -24,6 +27,9 @@ const ProjectsSection = () => {
     if (!openState.current[index]) {
       gsap.killTweensOf(panel);
       openState.current[index] = true;
+      setExpandedProjects((current) =>
+        current.map((open, i) => (i === index ? true : open)),
+      );
       const tl = gsap.timeline();
       tl.set(panel, { height: "auto", visibility: "visible" }).fromTo(
         panel,
@@ -49,6 +55,11 @@ const ProjectsSection = () => {
 
     gsap.killTweensOf(panel);
     openState.current[index] = false;
+    setExpandedProjects((current) =>
+      current[index]
+        ? current.map((open, i) => (i === index ? false : open))
+        : current,
+    );
 
     gsap.to(panel, {
       height: 0,
@@ -115,10 +126,19 @@ const ProjectsSection = () => {
                       textRefs.current[index] = el;
                     }}
                     className="font-anton text-4xl md:text-5xl lg:text-7xl decoration-4 underline underline-offset-4"
-                    style={{ textDecorationColor: "transparent" }}
+                    style={{
+                      textDecorationColor:
+                        index === 0 ? "black" : "transparent",
+                    }}
                   >
                     {curr.name.toLocaleUpperCase()}
                   </p>
+                  <span
+                    aria-hidden="true"
+                    className="shrink-0 px-1 font-inter text-2xl leading-none md:text-3xl lg:text-5xl"
+                  >
+                    {expandedProjects[index] ? "−" : "+"}
+                  </span>
                   <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4 border-black hidden md:block lg:block"></hr>
                   <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
                     {curr.date}
@@ -129,7 +149,11 @@ const ProjectsSection = () => {
                     panelRefs.current[index] = el;
                   }}
                   className="flex flex-col gap-4 overflow-hidden"
-                  style={{ height: 0, opacity: 0, visibility: "hidden" }}
+                  style={
+                    index === 0
+                      ? { height: "auto", opacity: 1, visibility: "visible" }
+                      : { height: 0, opacity: 0, visibility: "hidden" }
+                  }
                 >
                   <div className="flex gap-3 overflow-x-scroll overflow-y-hidden custom-scrollbar">
                     {curr.imgs.map((currImg, imgIndex) => {
@@ -160,36 +184,10 @@ const ProjectsSection = () => {
         </div>
       </div>
       <hr className="border-0 border-b-6 w-[95dvw]"></hr>
-      <div className="w-full pt-12 pb-12 md:pb-16 lg:pb-16 px-8 md:px-12 lg:px-20">
-        <div className="flex flex-col gap-6 md:gap-6 lg:gap-8">
-          <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-4xl md:text-5xl lg:text-7xl decoration-4">
-              TOTAL
-            </p>
-            <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4 border-black hidden md:block lg:block"></hr>
-            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
-              {projects.length} PROJECTS
-            </p>
-          </div>
-          <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-4xl md:text-5xl lg:text-7xl">
-              HOURS SPENT ON WYSIWYG
-            </p>
-            <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4 border-black hidden md:block lg:block"></hr>
-            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
-              2000+
-            </p>
-          </div>
-          <div className="flex justify-between items-center gap-1.5 cursor-pointer">
-            <p className="font-anton text-4xl md:text-5xl lg:text-7xl">
-              PEERS RAGEBAITED
-            </p>
-            <hr className="w-fit flex-auto mx-5 self-end my-2 border-dotted border-0 border-b-4 border-black hidden md:block lg:block"></hr>
-            <p className="font inter text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold tracking-tighter">
-              UNCOUNTABLE
-            </p>
-          </div>
-        </div>
+      <div className="flex w-full items-center justify-center px-8 py-6 text-center md:px-12 md:py-8 lg:px-20 lg:py-10">
+        <p className="font-anton text-4xl md:text-5xl lg:text-7xl">
+          AND MANY MORE...
+        </p>
       </div>
       {activeImage && (
         <ImageLightbox
